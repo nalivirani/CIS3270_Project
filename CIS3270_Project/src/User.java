@@ -1,5 +1,35 @@
 
-public abstract class User {
+ abstract public class User {
 	//this is the abstract user class
+	protected String firstName;
+	protected String lastName;
+	protected String address;
+	protected int zipCode;
+	protected String stateOfResidence;
+	protected String username;
+	protected String password;
+	protected String email;
+	protected long ssn;
+	protected String recoveryQuestion;
+	protected boolean isAdmin;
+	
+	public User(){
+		this.firstName = "No first name";
+		this.lastName = "No last name";
+		this.address = "No address";
+		this.zipCode = 12345;
+		this.stateOfResidence = "No state listed";
+		this.username = "No username created";
+		this.password = "No password created";
+		this.email = "No email address";
+		this.ssn = 123456789;
+		this.recoveryQuestion = "No security question created";
+		this.isAdmin = false;
+	}
+	
+	
+	abstract protected void createUser();
+	
+	abstract protected boolean isAdmin();
 
 }
