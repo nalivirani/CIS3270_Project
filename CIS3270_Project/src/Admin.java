@@ -7,7 +7,7 @@ public class Admin extends User{
 	
 	public Admin(String firstName, String lastName, String address, int zipCode, String stateOfResidence, 
 			String username, String password, String email, long ssn, String recoveryQuestion) {
-		this.firstName = firstName;
+		this.setFirstName(firstName);
 		this.lastName = lastName;
 		this.address = address;
 		this.zipCode = zipCode;
@@ -31,13 +31,22 @@ public class Admin extends User{
 		// TODO Auto-generated method stub
 		return isAdmin;
 	}
+	
+	@Override
+	public String toString() {
+		return "Admin [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", zipCode="
+				+ zipCode + ", stateOfResidence=" + stateOfResidence + ", username=" + username + ", password="
+				+ password + ", email=" + email + ", ssn=" + ssn + ", recoveryQuestion=" + recoveryQuestion
+				+ ", isAdmin=" + isAdmin + "]";
+	}
+
 	protected String getFirstName() {
-		return firstName;
+		return getFirstName();
 	}
 
 
 	protected void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.setFirstName(firstName);
 	}
 
 

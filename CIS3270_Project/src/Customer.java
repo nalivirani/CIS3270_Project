@@ -2,7 +2,7 @@
 public class Customer extends User{
 	
 	public Customer(){
-		
+		this.isAdmin = false;
 	}
 
 	public Customer(String firstName, String lastName, String address, int zipCode, String stateOfResidence, 
@@ -21,7 +21,7 @@ public class Customer extends User{
 	}
 	
 	public Customer(String name){
-		super.firstName = name;
+		this.setFirstName(name);
 	}
 	
 	@Override
@@ -29,14 +29,21 @@ public class Customer extends User{
 		// TODO Auto-generated method stub
 		
 	}
-	
 
 	@Override
 	public boolean isAdmin() {
 		// TODO Auto-generated method stub
 		return isAdmin;
 	}
-	
+		
+	@Override
+	public String toString() {
+		return "Customer [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", zipCode="
+				+ zipCode + ", stateOfResidence=" + stateOfResidence + ", username=" + username + ", password="
+				+ password + ", email=" + email + ", ssn=" + ssn + ", recoveryQuestion=" + recoveryQuestion
+				+ ", isAdmin=" + isAdmin + "]";
+	}
+
 	protected String getFirstName() {
 		return firstName;
 	}

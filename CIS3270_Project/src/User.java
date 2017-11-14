@@ -28,8 +28,17 @@
 	}
 	
 	
-	abstract protected void createUser();
-	
-	abstract protected boolean isAdmin();
+	protected abstract void createUser();
+	protected abstract boolean isAdmin();
 
+
+	@Override
+	public String toString() {
+		return "User [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", zipCode="
+				+ zipCode + ", stateOfResidence=" + stateOfResidence + ", username=" + username + ", password="
+				+ password + ", email=" + email + ", ssn=" + ssn + ", recoveryQuestion=" + recoveryQuestion
+				+ ", isAdmin=" + isAdmin + "]";
+	}
+	
+	
 }
