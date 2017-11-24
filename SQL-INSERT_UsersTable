@@ -1,0 +1,17 @@
+--User table insert statements:
+
+INSERT INTO User(SSN, FirstName, LastName, address, zip, State, Username, Password, email, SecurityQuestion, SecurityAnswer, PermissionLevel) 
+  VALUES(123456789, 'Test', 'Customer1', '1253 Peachtree Street SE', 30309, 'GA', 'UserName123', 'P@s$w0Rd123', 'testCustomer1@gmail.com', 
+	   'Favorite Color?', 'red', 0);
+
+INSERT INTO User(SSN, FirstName, LastName, address, zip, State, Username, Password, email, SecurityQuestion, SecurityAnswer, PermissionLevel) 
+  VALUES(987654321, 'Test', 'Admin1', '4263 Main Street', 30297, 'GA', 'Admin123', 'P@s$w0Rd321', 'testAdmin1@gmail.com', 
+	   'Favorite Movie?', 'Planes, Trains, and Automobiles', 1);
+
+INSERT INTO User(SSN, FirstName, LastName, address, zip, State, Username, Password, email, SecurityQuestion, SecurityAnswer, PermissionLevel) 
+  VALUES(123456789, 'Test', 'Customer2', '789 West Paces Ferry', 30309, 'GA', 'UserName234', 'P@s$w0Rd123', 'testCustomer2@gmail.com', 
+	   'Favorite Color?', 'blue', 0);
+
+INSERT INTO User(SSN, FirstName, LastName, address, zip, State, Username, Password, email, SecurityQuestion, SecurityAnswer, PermissionLevel) 
+  VALUES(987654321, 'Test', 'Admin2', '562 Elm Lane', 30303, 'GA', 'Admin234', 'P@s$w0Rd321', 'testAdmin2@gmail.com', 
+	   'Favorite Movie?', 'Oceans Eleven', 1);
