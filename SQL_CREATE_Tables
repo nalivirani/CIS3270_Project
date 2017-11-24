@@ -1,0 +1,64 @@
+-- SQL CREATE statments
+
+CREATE TABLE User (
+	SSN       	 	  INT	 (9)     NOT NULL,
+	FirstName    	  varchar(30)	 NOT NULL, 
+	LastName     	  varchar(30)    NOT NULL,
+	address      	  varchar(120),
+	zip			 	  INT	 (5),
+	State 		 	  varchar(2),
+	Username	 	  varchar(5, 30) NOT NULL,
+	Password	 	  varchar(8, 30) NOT NULL,
+	email		 	  varchar(100)   NOT NULL,
+	SecurityQuestion  varchar(240)   NOT NULL,
+	PermissionLevel	  INT	 (1)	 NOT NULL,
+	
+	CONSTRAINT User_pk PRIMARY KEY (SSN)
+);
+
+CREATE TABLE Plane (
+	flightNum  	      INT    (4)	 NOT NULL,
+	equipType         varchar(10),
+	range		      INT 	 (4),
+	capacity	      INT	 (3),
+	numOfRows	      INT	 (2),
+	seatsPerRow       INT    (2), 
+	NumOf_FCseats     INT    (3)	 NOT NULL,
+	Entertainment     varchar(3),
+	seatDiagram	      MEDIUMBLOB,
+	
+	CONSTRAINT Plane_pk PRIMARY KEY (IdNum),
+);
+
+CREATE TABLE Flight (
+	flightNum	      INT     (4)	 NOT NULL,
+	depDateTime       DateTime       NOT NULL,
+	depCity		      varchar (30)   NOT NULL,
+	arrDateTime       DateTime,
+	arrCity		      varchar (30)   NOT NULL,
+	distance		  numeric(4,0)
+	stopType	      varchar (8),
+	region		      varchar (13),
+	FCTicketPrice	  DECIMAL (6,2),
+	TicketPrice		  DECIMAL (6,2)  NOT NULL,
+
+	CONSTRAINT Flight_pk PRIMARY KEY (flightNum, depDateTime),
+	CONSTRAINT Flight_Plane_fk FOREIGN KEY (flightNum)
+		REFERENCES Plane(flightNum)
+);
+
+CREATE TABLE Reservation (
+	ticketNum		INT 	(8)	     NOT NULL,
+	SSN				INT		(9)      NOT NULL,
+	flightNum	    INT 	(4)	     NOT NULL,
+	depDateTime		DateTime		 NOT NULL,
+	depCity			varchar (30)	 NOT NULL,
+	seat 			varchar (5),
+	seatClass		varchar (15),
+
+	CONSTRAINT Reservation_pk PRIMARY KEY (ticketNum),
+	CONSTRAINT Reservation_Flight_fk FOREIGN KEY (flightNum, depDateTime)
+		REFERENCES Flight(flightNum, depDateTime),
+	CONSTRAINT Reservation_User_fk FOREIGN KEY (SSN)
+		REFERENCES User(SSN)
+);
