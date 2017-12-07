@@ -1,0 +1,81 @@
+package project;
+
+import java.sql.*;
+
+public class Database {
+
+	public static void main(String[] args) {
+				
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			//System.out.println("Driver loaded");
+
+			String connectionID = "jdbc:mysql://localhost:3306/new_schema?autoReconnect=true&useSSL=false";
+			
+			Connection c = DriverManager.getConnection(connectionID, "root", "cis3270");
+			//c.clearWarnings();
+			
+			String insertStatement = "insert into user (SSN, FirstName, LastName, address, zip, State, Username, Password, email, " +
+									 "SecurityQuestion, SecurityAnswer, PermissionLevel) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String query = "select * from User Where Username=?";
+			
+			PreparedStatement userInsert = c.prepareStatement(insertStatement);
+			
+			userInsert.setInt   (1, 231);
+			userInsert.setString(2, "Bob");
+			userInsert.setString(3, "Smith");
+			userInsert.setString(4, "8234 South Pine St.");
+			userInsert.setInt   (5, 90210);
+			userInsert.setString(6, "CA");
+			userInsert.setString(7, "BobIsAwesome1");
+			userInsert.setString(8, "HoldMyBeer");
+			userInsert.setString(9, "Bob.smith@yahoo.com");
+			userInsert.setString(10,"What's my favorite sport?");
+			userInsert.setString(11,"Nascar");
+			userInsert.setInt   (12, 0);
+			
+			//userInsert.executeQuery(insertStatement);
+			
+			//userInsert.;
+			
+			//PreparedStatement userQuery1 = c.prepareStatement(query);
+			//userQuery1.setString(1, "BobIsAwesome1");
+			
+			PreparedStatement userQuery2 = c.prepareStatement(query);
+			userQuery2.setString(1, "Admin123");
+			
+			ResultSet rs = userQuery2.executeQuery();
+			
+			while (rs.next()) {
+			
+				int ssn = rs.getInt("SSN");
+				String firstName = rs.getString("FirstName");
+				String lastName = rs.getString("LastName");
+				String address = rs.getString("address");
+				int zip = rs.getInt("zip");
+				String state = rs.getString("State");
+				String userName = rs.getString("UserName");
+				String password = rs.getString("Password");
+				String email = rs.getString("email");
+				String securityQuestion = rs.getString("SecurityQuestion");
+				String securityAnswer = rs.getString("SecurityAnswer");
+				int permission = rs.getInt("PermissionLevel");
+				
+				System.out.println("   SSN  |  FName | LName |    address    | zip |State|  uName  |  Password  |       email       | SecurityQuestion |        SecurityAnswer        | Admin? |");
+				
+				System.out.print(ssn + ",  " + firstName + ", " + lastName + ", " + address + ", " + zip + ", " 
+							   + state + ", " + userName + ", " + password + ", " + email + ", " + securityQuestion + ", " 
+							   + securityAnswer + ", " + permission);
+			}
+			
+			c.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+	}
+
+}
