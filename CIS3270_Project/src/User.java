@@ -39,6 +39,5 @@
 				+ password + ", email=" + email + ", ssn=" + ssn + ", recoveryQuestion=" + recoveryQuestion
 				+ ", isAdmin=" + isAdmin + "]";
 	}
-	
-	
+
 }
