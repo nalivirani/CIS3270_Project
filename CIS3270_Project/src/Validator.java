@@ -14,8 +14,8 @@ public class Validator {
 	
 	public boolean checkLength(String str){
 		return true;
-		
 	}
+	
 	
 
 }

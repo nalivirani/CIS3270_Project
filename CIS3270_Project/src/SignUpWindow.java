@@ -18,8 +18,17 @@ import javafx.stage.Stage;
 public class SignUpWindow {
 	static int r = 2;
 	static int c = 2;
+	static User xyz = new User();
 	
-    public static final Font ITALIC_FONT =
+    public User getXyz() {
+		return xyz;
+	}
+
+	public void setXyz(User xyz) {
+		this.xyz = xyz;
+	}
+
+	public static final Font ITALIC_FONT =
             Font.font(
             		"System Regular",
                     FontPosture.ITALIC,
@@ -204,7 +213,6 @@ public class SignUpWindow {
 		adminInput.setPromptText("Admin Password");
 		GridPane.setConstraints(adminInput, c+3, r+9);
 		
-		User xyz = new User();
 		
 		signUpButton.setOnAction(e -> {
 			xyz.setfName(firstNameInput.getText());

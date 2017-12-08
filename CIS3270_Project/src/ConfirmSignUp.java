@@ -27,18 +27,18 @@ public class ConfirmSignUp {
 			str = "Admin";
 		}
 		
-		Label fname = new Label("First Name: " + xyz.getfName());
-		Label lname = new Label("Last Name: " + xyz.getlName());
-		Label addr = new Label("Address: " + xyz.getAddress());
-		Label zip = new Label("Zip Code: " + Integer.toString(xyz.getZip()));
-		Label st = new Label("State: " + xyz.getState());
-		Label email = new Label("Email: " + xyz.getEmail());
-		Label usr = new Label("Username: " + xyz.getUsername());
-		Label pss = new Label("Password: " + xyz.getPassword());
-		Label ssn = new Label("Social Security Number: " + Integer.toString(xyz.getSsn()));
-		Label secQ = new Label("Security Question: " + xyz.getSecurityQuestion());
-		Label secA = new Label("Security Question: " + xyz.getSecurityAnswer());
-		Label adm = new Label("Permission Level: " + str);
+		Label fname = new Label("First Name: 	" + xyz.getfName());
+		Label lname = new Label("Last Name: 	" + xyz.getlName());
+		Label addr = new Label("Address: 	" + xyz.getAddress());
+		Label zip = new Label("Zip Code: 	" + Integer.toString(xyz.getZip()));
+		Label st = new Label("State: 	" + xyz.getState());
+		Label email = new Label("Email: 	" + xyz.getEmail());
+		Label usr = new Label("Username: 	" + xyz.getUsername());
+		Label pss = new Label("Password: 	" + xyz.getPassword());
+		Label ssn = new Label("Social Security Number: 	" + Integer.toString(xyz.getSsn()));
+		Label secQ = new Label("Security Question: 	" + xyz.getSecurityQuestion());
+		Label secA = new Label("Security Question: 	" + xyz.getSecurityAnswer());
+		Label adm = new Label("Permission Level: 	" + str);
 		
 		Button editButton = new Button("Edit");
 		editButton.setOnAction(e -> window.close());	

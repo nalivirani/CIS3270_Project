@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.sql.*;
 
-public class Main extends Application {
+public class MainLobby extends Application {
 	
 	Stage main_window, signUp_window, login_window;
 	Scene lobby, main_scene;
@@ -46,15 +46,18 @@ public class Main extends Application {
 		
 		//add to scene
 		grid.getChildren().addAll(header, loginButton, signUpButton);
-
-		
 		
 		Scene scene = new Scene(grid, 300, 500);
 		main_window.setScene(scene);
 		main_window.show();
 		
-		
-		
 	}
-
+	
+//	public static Scene sceneSetter(Scene scene){
+//		if(LoginWindow.auth == false){
+//			return scene;
+//		}else{
+//			return CustomerMenu.scene;
+//		}
+//	}
 }
