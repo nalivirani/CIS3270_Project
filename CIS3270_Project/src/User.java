@@ -12,6 +12,7 @@
 	protected long ssn;
 	protected String recoveryQuestion;
 	protected boolean isAdmin;
+	protected String recoveryAnswer;
 	
 	public User(){
 		this.firstName = "No first name";
@@ -24,6 +25,7 @@
 		this.email = "No email address";
 		this.ssn = 123456789;
 		this.recoveryQuestion = "No security question created";
+		this.recoveryAnswer = "No answer set";
 		this.isAdmin = false;
 	}
 	

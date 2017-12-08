@@ -6,7 +6,7 @@ public class Admin extends User{
 	}
 	
 	public Admin(String firstName, String lastName, String address, int zipCode, String stateOfResidence, 
-			String username, String password, String email, long ssn, String recoveryQuestion) {
+			String username, String password, String email, long ssn, String recoveryQuestion, String recoveryAnswer) {
 		this.setFirstName(firstName);
 		this.lastName = lastName;
 		this.address = address;
@@ -17,6 +17,7 @@ public class Admin extends User{
 		this.email = email;
 		this.ssn = ssn;
 		this.recoveryQuestion = recoveryQuestion;
+		this.recoveryAnswer = recoveryAnswer;
 		this.isAdmin = true;
 	}
 	
