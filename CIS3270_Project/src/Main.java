@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.sql.*;
 
 public class Main extends Application {
 	
@@ -17,6 +18,9 @@ public class Main extends Application {
 	
 	public static void main(String[] args){
 		launch(args);
+		//User us = new User();
+		
+		//us.pQuery("Admin234");
 	}
 	
 
