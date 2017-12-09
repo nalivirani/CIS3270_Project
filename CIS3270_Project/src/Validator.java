@@ -2,7 +2,7 @@
 public class Validator {
 	public static void main(String[] args){}
 	
-	public boolean isInt(String str){
+	public static boolean isInt(String str){
 		try{
 			int num = Integer.parseInt(str);
 			return true;

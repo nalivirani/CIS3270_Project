@@ -8,6 +8,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -19,14 +20,6 @@ public class SignUpWindow {
 	static int r = 2;
 	static int c = 2;
 	static User xyz = new User();
-	
-    public User getXyz() {
-		return xyz;
-	}
-
-	public void setXyz(User xyz) {
-		this.xyz = xyz;
-	}
 
 	public static final Font ITALIC_FONT =
             Font.font(
@@ -256,4 +249,5 @@ public class SignUpWindow {
 		
 		System.out.println(xyz.toString());
 	}
+	
 }

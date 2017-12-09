@@ -20,7 +20,6 @@ public class LoginWindow{
 	static boolean auth = false;
 
 	public static void display(){
-		User xyz = SignUpWindow.xyz;
 		
 		Stage window = new Stage();
 		

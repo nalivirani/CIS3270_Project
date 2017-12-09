@@ -10,10 +10,9 @@ import javafx.scene.layout.VBox;
 
 public class ConfirmSignUp {
 	
-	static boolean confirm = false;
+	static boolean confirm = false; ;
 	
 	public static void display(User xyz){
-	
 		Stage window = new Stage();
 		
 		window.initModality(Modality.APPLICATION_MODAL);

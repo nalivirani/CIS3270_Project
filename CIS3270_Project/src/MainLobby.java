@@ -26,7 +26,7 @@ public class MainLobby extends Application {
 
 	@Override
 	public void start(Stage main_window) throws Exception {
-		
+
 		Label header = new Label("Flights Galore");
 		Button loginButton = new Button("Login");
 		Button signUpButton = new Button("Sign Up");
