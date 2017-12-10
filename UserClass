@@ -1,5 +1,3 @@
-//User Class
-
 package database;
 
 import java.sql.*;
@@ -39,6 +37,31 @@ public class User extends Database {
 
 	public int getSsn() {
 		return ssn;
+	}
+	
+	public int getSsn(String username) {
+		int ssn = 0;
+		try {
+			Connection c = DriverManager.getConnection(super.getConnectionID(), super.getDBusername(), super.getDBpassword());
+		
+			String query = "select SSN from user Where Username=?";
+			PreparedStatement userQuery = c.prepareStatement(query);
+			userQuery.setString(1, username);
+		
+			ResultSet rs = userQuery.executeQuery();
+			
+			ssn = rs.getInt("SSN"); 
+		}
+		
+		catch(Exception e) {
+			
+		}
+		
+		return ssn;
+	}
+	
+	protected void setSsn(int ssn) {
+		this.ssn = ssn;
 	}
 
 	public String getfName() {
@@ -125,12 +148,71 @@ public class User extends Database {
 		return permissionLevel;
 	}
 
-	public void setPermissionLevel(int permissionLevel) {
+	protected void setPermissionLevel(int permissionLevel) {
 		this.permissionLevel = permissionLevel;
 	}
 /* **********************************************************************************
  * *-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/*
  * **********************************************************************************/	
+	
+	public boolean canLogin(String username) {
+		if(!this.isNewUser(this.getSsn(username))) {
+			return true;
+		}
+		else return false;
+	}
+	
+	public User login(String username, String password) {
+		User currentUser = new User();
+		if(this.canLogin(username)) {
+			try {
+				Connection c = DriverManager.getConnection(super.getConnectionID(), super.getDBusername(), super.getDBpassword());
+			
+				String query = "select * from user Where Username=?";
+				PreparedStatement userQuery = c.prepareStatement(query);
+				userQuery.setString(1, username);
+			
+				ResultSet rs = userQuery.executeQuery();
+				
+				while(rs.next()) {
+					currentUser.setSsn(rs.getInt("SSN"));
+					currentUser.setfName(rs.getString("FirstName"));
+					currentUser.setlName(rs.getString("LastName"));
+					currentUser.setAddress(rs.getString("address"));
+					currentUser.setZip(rs.getInt("zip"));
+					currentUser.setState(rs.getString("State"));
+					currentUser.setUserName(rs.getString("UserName"));
+					currentUser.setPassword(rs.getString("Password"));
+					currentUser.setSecurityQuestion(rs.getString("email"));
+					currentUser.setEmail(rs.getString("SecurityQuestion"));
+					currentUser.setSecurityAnswer(rs.getString("SecurityAnswer"));
+					currentUser.setPermissionLevel(rs.getInt("PermissionLevel"));
+				}
+				c.close();
+			}
+			
+			catch(Exception e) {
+				
+			}
+		}
+		
+		return currentUser;
+	}
+	
+	public void logout() {
+		this.setSsn(0);
+		this.setfName("");
+		this.setlName("");
+		this.setAddress("");
+		this.setZip(0);
+		this.setEmail("");
+		this.setUserName("");
+		this.setPassword("");
+		this.setSecurityQuestion("");
+		this.setSecurityAnswer("");
+		this.setPermissionLevel(0);
+	}
+	
 	public void updateFname(int ssn, String newFname) {
 		this.fName = newFname;
 		
@@ -142,7 +224,6 @@ public class User extends Database {
 			PreparedStatement userUpdate = c.prepareStatement(update);
 			userUpdate.setString(1, newFname);
 			userUpdate.setInt(2, ssn);
-			
 			userUpdate.executeUpdate();
 		}
 		
