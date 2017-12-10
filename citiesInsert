@@ -1,0 +1,23 @@
+INSERT INTO Cities(Id, depCity, arCityOne, arCityTwo, arCityThr, arCityFor, arCityFve, arCitySix)
+  VALUES(1, 'ATL', 'DCA', 'DFW', 'JFK', 'LAX', 'MIA', 'ORD');
+
+INSERT INTO Cities(Id, depCity, arCityOne, arCityTwo, arCityThr, arCityFor)
+  VALUES(2, 'DCA', 'ATL', 'JFK', 'MIA', 'ORD');
+
+INSERT INTO Cities(Id, depCity, arCityOne, arCityTwo, arCityThr)
+  VALUES(3, 'DEN', 'DFW', 'LAX', 'ORD');
+
+INSERT INTO Cities(Id, depCity, arCityOne, arCityTwo, arCityThr, arCityFor, arCityFve)
+  VALUES(4, 'DFW', 'ATL', 'DEN', 'LAX', 'MIA', 'ORD');
+
+INSERT INTO Cities(Id, depCity, arCityOne, arCityTwo, arCityThr, arCityFor, arCityFve)
+  VALUES(5, 'JFK', 'ATL', 'DCA', 'LAX', 'MIA', 'ORD');
+
+INSERT INTO Cities(Id, depCity, arCityOne, arCityTwo, arCityThr, arCityFor)
+  VALUES(6, 'LAX', 'ATL', 'DEN', 'DFW', 'JFK');
+
+INSERT INTO Cities(Id, depCity, arCityOne, arCityTwo, arCityThr, arCityFor)
+  VALUES(7, 'MIA', 'ATL', 'DCA', 'DFW', 'JFK');
+
+INSERT INTO Cities(Id, depCity, arCityOne, arCityTwo, arCityThr, arCityFor, arCityFve)
+  VALUES(8, 'ORD', 'ATL', 'DCA', 'DEN', 'DFW', 'JFK');
