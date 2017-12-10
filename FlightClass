@@ -1,31 +1,31 @@
 package database;
 
-//import java.util.Calendar;
-import java.time.LocalDateTime;
-//import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Time;
 //import java.time.ZonedDateTime;
 //import java.sql.Time;
 //import java.text.DateFormat;
 //import java.time.*;
 import java.math.BigDecimal;
-//import java.text.*;
 
-@SuppressWarnings("unused")
 public class Flight extends Database{
 	
 	private static final String TABLE = "flight";
+	protected int fID;
 	protected int flightNum;
-	//protected java.sql.Date depDate;
-	protected LocalDateTime depDate; 
-	protected LocalDateTime depTime; 
 	protected String depCity;
-	protected LocalDateTime arrDate;
-	protected LocalDateTime arrTime;
 	protected String arrCity;
+	protected LocalDate depDate;
+	protected LocalDate arrDate;
+	protected LocalTime depTime; 
+	protected LocalTime arrTime;
 	protected int distance;
 	protected String stopType;
 	protected String region;
@@ -33,116 +33,199 @@ public class Flight extends Database{
 	protected BigDecimal fcTicketPrice;
 	protected int seats;
 	protected int seatsRem;
+	protected int numRows;
+	protected int seatsPerRow;
 		
-	public Flight(int flightNum, LocalDateTime depDate, LocalDateTime depTime) {
-		this.flightNum = flightNum;
-		this.depDate = depDate;
-		this.depTime = depTime;
-	}
-	
 	public Flight() {
 		
 	}
+	
+	public Flight(int flightNum, LocalDate depDate, LocalTime depTime) {
+		this.flightNum = flightNum;
+		this.depDate   = depDate;
+		this.depTime   = depTime;
+	}
+	
+	public Flight(int fID, int flightNum, String depCity, String arrCity, LocalDate depDate, LocalDate arrDate,
+				  LocalTime depTime, LocalTime arrTime, int distance, String stopType, String region, BigDecimal ticketPrice,
+				  BigDecimal fcTicketPrice, int seats, int seatsRem, int numRows, int seatsPerRow) {
 		
+		this.fID = fID;
+		this.flightNum = flightNum;
+		this.depCity = depCity;
+		this.arrCity = arrCity;
+		this.depDate = depDate;
+		this.arrDate = arrDate;
+		this.depTime = depTime;
+		this.arrTime = arrTime;
+		this.distance = distance;
+		this.stopType = stopType;
+		this.region = region;
+		this.ticketPrice = ticketPrice;
+		this.fcTicketPrice = fcTicketPrice;
+		this.seats = seats;
+		this.seatsRem = seatsRem;
+		this.numRows = numRows;
+		this.seatsPerRow = seatsPerRow;
+	}
+	
+	public int getfID() {
+		return fID;
+	}
+
+	public void setfID(int fID) {
+		this.fID = fID;
+	}
+	
 	public int getFlightNum() {
 		return flightNum;
 	}
+	
 	public void setFlightNum(int flightNum) {
 		this.flightNum = flightNum;
 	}
-	public java.time.LocalDateTime getDepDateTime() {
-		return depDateTime;
+	
+	public LocalDate getDepDate() {
+		return depDate;
 	}
-	public void setDepDateTime(java.time.LocalDateTime depDateTime) {
-		this.depDateTime = depDateTime;
+	
+	public void setDepDate(LocalDate depDate) {
+		this.depDate = depDate;
 	}
-//	public java.time.LocalDateTime getDepTime() {
-	//	return depDateTime;
-//	}
-	//public void setDepTime(java.time.LocalDateTime depDateTime) {
-	//	this.depTime = depTime;
-	//}
+	
+	public LocalTime getDepTime() {
+		return depTime;
+	}
+	
+	public void setDepTime(LocalTime depTime) {
+		this.depTime = depTime;
+	}
+
 	public String getDepCity() {
 		return depCity;
 	}
+	
 	public void setDepCity(String depCity) {
 		this.depCity = depCity;
 	}
-	public java.time.LocalDateTime getArrDateTime() {
-		return arrDateTime;
+	
+	public LocalDate getArrDate() {
+		return arrDate;
 	}
-	public void setArrDateTime(java.time.LocalDateTime arrDateTime) {
-		this.arrDateTime = arrDateTime;
+	
+	public void setArrDate(LocalDate arrDate) {
+		this.arrDate = arrDate;
 	}
-	//public Time getArrTime() {
-	//	return arrTime;
-	//}
-	//public void setArrTime(Time arrTime) {
-	//	this.arrTime = arrTime;
-	//}
+	
+	public LocalTime getArrTime() {
+		return arrTime;
+	}
+	
+	public void setArrTime(LocalTime arrTime) {
+		this.arrTime = arrTime;
+	}
+	
 	public String getArrCity() {
 		return arrCity;
 	}
+	
 	public void setArrCity(String arrCity) {
 		this.arrCity = arrCity;
 	}
+	
 	public int getDistance() {
 		return distance;
 	}
+	
 	public void setDistance(int distance) {
 		this.distance = distance;
 	}
+	
 	public String getStopType() {
 		return stopType;
 	}
+	
 	public void setStopType(String stopType) {
 		this.stopType = stopType;
 	}
+	
 	public String getRegion() {
 		return region;
 	}
+	
 	public void setRegion(String region) {
 		this.region = region;
 	}
 	public BigDecimal getTicketPrice() {
 		return ticketPrice;
 	}
+	
 	public void setTicketPrice(BigDecimal ticketPrice) {
 		this.ticketPrice = ticketPrice;
 	}
+	
 	public BigDecimal getFcTicketPrice() {
 		return fcTicketPrice;
 	}
+	
 	public void setFcTicketPrice(BigDecimal fcTicketPrice) {
 		this.fcTicketPrice = fcTicketPrice;
 	}
-	public int getSeats() {
-		return seats;
-	}
-	public void setSeats(int seats) {
-		this.seats = seats;
-	}
+	
 	public int getSeatsRem() {
 		return seatsRem;
 	}
+	
 	public void setSeatsRem(int seatsRem) {
 		this.seatsRem = seatsRem;
 	}
+
+	public int getSeats() {
+		return seats;
+	}
+
+	public void setSeats(int seats) {
+		this.seats = seats;
+	}
+
+	public int getNumRows() {
+		return numRows;
+	}
+
+	public void setNumRows(int numRows) {
+		this.numRows = numRows;
+	}
+
+	public int getSeatsPerRow() {
+		return seatsPerRow;
+	}
+
+	public void setSeatsPerRow(int seatsPerRow) {
+		this.seatsPerRow = seatsPerRow;
+	}
+
 	public void seatRemInc(int n) {
 		this.seatsRem += n;
 	}
+	
 	public void seatRemDec(int n) {
 		this.seatsRem -= n;
 	}
+	
 	public void seatRemInc() {
 		this.seatsRem += 1;
 	}
+	
 	public void seatRemDec() {
 		this.seatsRem -= 1;
 	}
 	
-	public void printLocalDateTime() {
-		System.out.println(" " + this.depDateTime);
+	public void printLocalDate() {
+		System.out.println(" " + this.depDate);
+	}
+	
+	public void printLocalTime() {
+		System.out.println(" " + this.depTime);
 	}
 
 	@Override
@@ -154,7 +237,7 @@ public class Flight extends Database{
 	
 		Flight f = (Flight) o;
 		
-		if(this.flightNum == f.flightNum && this.depDateTime == f.depDateTime) {
+		if(this.flightNum == f.flightNum && this.depDate == f.depDate && this.depTime == f.depTime) {
 			return true;
 		}
 			
@@ -164,9 +247,9 @@ public class Flight extends Database{
 	@Override
 	public String toString() {
 			
-		return "Flight Number: " + this.getFlightNum() + "\nFrom: " + this.getDepCity() + " To: " + this.getArrCity() + "\nDeparting: " + this.getDepDateTime() + 
-				"\nEstimated Arrival: " + this.getArrDateTime() + "\n\nService: " + this.getStopType() + 
-				"\nTicket Prices: \nFirst Class: " + this.getFcTicketPrice() + "\nEconomy: " + this.getTicketPrice();
+		return "Flight Number: " + this.getFlightNum() + "\nFrom: " + this.getDepCity() + " To: " + this.getArrCity() + "\nDeparting: " + this.getDepDate() + 
+				" on " + this.getDepTime() + "\nEstimated Arrival: " + this.getArrTime() + " on "+ this.getArrDate() + "\n\nService: " + this.getStopType() + 
+				"\nTicket Prices: \nFirst Class: " + this.getFcTicketPrice() + "\nEconomy: " + this.getTicketPrice() + " \n\n\n";
 	}
 	
 //	@SuppressWarnings("finally")
@@ -174,10 +257,10 @@ public class Flight extends Database{
 		
 		System.out.println("\nDatabase: " + super.schema +"\nTable: " + Flight.TABLE);
 		
-		Flight fr = new Flight(this.flightNum, this.depDateTime);
+		Flight fr = new Flight(this.flightNum, this.depDate, this.getDepTime());
 		
 		try {
-			Connection c = DriverManager.getConnection(super.getConnectionID(), super.getUsername(), super.getPassword());
+			Connection c = DriverManager.getConnection(super.getConnectionID(), super.getDBusername(), super.getDBpassword());
 		
 			//String query = "select * from Flight Where depCity=? and arrCity=? and depDate=?";
 			String query = "select * from " + TABLE + "Where flightNum=?";
@@ -187,13 +270,9 @@ public class Flight extends Database{
 			//userQuery.setString(2, arrCity);
 			//userQuery.setDate  (3, depDate);
 		
-			ResultSet rs = flightQuery.executeQuery();
-			
-		//	DateFormat df = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss z");
-			
+			ResultSet rs = flightQuery.executeQuery();		
 			
 			while (rs.next()) {
-
 				fr.flightNum = rs.getInt("flightNum");
 				fr.depCity = rs.getString("depCity");
 				//this.depDateTime = rs.getDate("depDateTime");
@@ -234,57 +313,56 @@ public class Flight extends Database{
 		//finally {
 			System.out.println("\n");
 			//return fr;
-			Flight z = new Flight(1, this.depDateTime);
+			Flight z = new Flight();
 			return z;
 			//return fr;
 		//}
 	
 	}
 	
-	public void insert(int ssn, String fName, String lName, String address, int zip, String state, String userName, String password, String email, String securityQuestion, String securityAnswer, int permissionLevel) {
+	public void updateFlight(int ssn, String fName, String lName, String address, int zip, String state, String userName, String password, String email, String securityQuestion, String securityAnswer, int permissionLevel) {
 		System.out.println("\nDatabase: " + super.schema +"\nTable: " + Flight.TABLE);
 		
 		try {
 			
-			Connection c = DriverManager.getConnection(super.getConnectionID(), super.getUsername(), super.getPassword());
+			Connection c = DriverManager.getConnection(super.getConnectionID(), super.getDBusername(), super.getDBpassword());
 		
 			String insertStatement = "insert into user (SSN, FirstName, LastName, address, zip, State, Username, Password, email, " +
 				 "SecurityQuestion, SecurityAnswer, PermissionLevel) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
-			PreparedStatement userInsert = c.prepareStatement(insertStatement);
+			PreparedStatement flightInsert = c.prepareStatement(insertStatement);
 		
-			userInsert.setInt   (1, ssn);
-			userInsert.setString(2, fName);
-			userInsert.setString(3, lName);
-			userInsert.setString(4, address);
-			userInsert.setInt   (5, zip);
-			userInsert.setString(6, state);
-			userInsert.setString(7, userName);
-			userInsert.setString(8, password);
-			userInsert.setString(9, email);
-			userInsert.setString(10,securityQuestion);
-			userInsert.setString(11,securityAnswer);
-			userInsert.setInt   (12, 0);
+			flightInsert.setInt   (1, ssn);
+			flightInsert.setString(2, fName);
+			flightInsert.setString(3, lName);
 			
-			userInsert.executeUpdate();
+			flightInsert.setString(4, address);
+			flightInsert.setInt   (5, zip);
+			flightInsert.setString(6, state);
+			
+			flightInsert.setString(7, userName);
+			flightInsert.setString(8, password);
+			flightInsert.setString(9, email);
+			
+			flightInsert.setString(10,securityQuestion);
+			flightInsert.setString(11,securityAnswer);
+			flightInsert.setInt   (12, 0);
+			
+			flightInsert.executeUpdate();
 		}
+		
 		catch (Exception e){
 			e.printStackTrace();
 			
-	}
-		
-		finally {
-			int a = 0;
-			System.out.println(a);
-		}
+		}	
 	}
 	
 	public String[] checkCity(String depCity) {
 		
-		String[] s = new String[7];
+		String[] cities = new String[7];
 		
 		try {
-			Connection c = DriverManager.getConnection(super.getConnectionID(), super.getUsername(), super.getPassword());
+			Connection c = DriverManager.getConnection(super.getConnectionID(), super.getDBusername(), super.getDBpassword());
 		
 			//String query = "select * from Flight Where depCity=? and arrCity=? and depDate=?";
 			String query = "select * from cities Where depCity=?";
@@ -299,20 +377,86 @@ public class Flight extends Database{
 			
 			while (rs.next()) {
 								
-				s[0] = rs.getString("depCity");
-				s[1] = rs.getString("arCityOne");
-				s[2] = rs.getString("arCityTwo");
-				s[3] = rs.getString("arCityThr");
-				s[4] = rs.getString("arCityFor");
-				s[5] = rs.getString("arCityFve");
-				s[6] = rs.getString("arCitySix");}
+				cities[0] = rs.getString("depCity");
+				cities[1] = rs.getString("arCityOne");
+				cities[2] = rs.getString("arCityTwo");
+				cities[3] = rs.getString("arCityThr");
+				cities[4] = rs.getString("arCityFor");
+				cities[5] = rs.getString("arCityFve");
+				cities[6] = rs.getString("arCitySix");}
 			}
 		
 		catch (Exception e) {
 			System.out.println("yay! you found an exception");
 		}
 		
-		return s;
+		return cities;
+	}
+	
+	public ArrayList<Flight> searchFlights (String depCity, String arrCity, LocalDate depDate) {
+		
+		ArrayList<Flight> flights = new ArrayList<>();
+		//Flight flightResult = new Flight();
+		
+		Date dDate = new Date(0);
+		Time dTime = new Time(0);
+		Date aDate = new Date(0);
+		Time aTime = new Time(0);
+		
+		
+		try {
+			Connection c = DriverManager.getConnection(super.getConnectionID(), super.getDBusername(), super.getDBpassword());
+		
+			String query = "select * from " + TABLE + " Where depCity=? and arrCity=? and depDate=?";
+		
+			PreparedStatement flightQuery = c.prepareStatement(query);
+			flightQuery.setString(1, depCity);
+			flightQuery.setString(2, arrCity);
+			flightQuery.setString(3, depDate.toString());
+		
+			ResultSet rs = flightQuery.executeQuery();		
+			
+			while (rs.next()) {
+				
+				dDate = rs.getDate("depDate");
+				aDate = rs.getDate("arrDate");
+				
+				dTime = rs.getTime("depTime");
+				aTime = rs.getTime("arrTime");
+				
+				flights.add(new Flight(
+						
+										rs.getInt("id"), 
+										rs.getInt("flightNum"), 
+										rs.getString("depCity"),
+										rs.getString("arrCity"),
+				
+										dDate.toLocalDate(),
+										aDate.toLocalDate(),
+				
+										dTime.toLocalTime(),
+										aTime.toLocalTime(),
+				
+										rs.getInt("distance"),
+										rs. getString("stopType"),
+										rs.getString("region"),
+				
+										rs.getBigDecimal("ticketPrice"),
+										rs.getBigDecimal("fcTicketPrice"),
+										
+										rs.getInt("seats"),
+										rs.getInt("seatsRem"),
+										rs.getInt("numRows"),
+										rs.getInt("seatsPerRow")
+				));
+			}
+		}
+		
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return flights;
 	}
 			
 }
