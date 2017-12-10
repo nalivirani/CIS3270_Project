@@ -1,0 +1,81 @@
+-- SQL CREATE Table statements
+
+CREATE TABLE `user` (
+  `SSN` int(9) NOT NULL,
+  `FirstName` varchar(45) NOT NULL,
+  `LastName` varchar(45) NOT NULL,
+  `address` varchar(120) NOT NULL,
+  `zip` int(11) DEFAULT NULL,
+  `State` varchar(2) DEFAULT NULL,
+  `UserName` varchar(20) NOT NULL,
+  `Password` varchar(30) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `SecurityQuestion` varchar(240) NOT NULL,
+  `SecurityAnswer` varchar(120) NOT NULL,
+  `PermissionLevel` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`SSN`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  UNIQUE KEY `UserName_UNIQUE` (`UserName`),
+  UNIQUE KEY `SSN_UNIQUE` (`SSN`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+
+CREATE TABLE `flight` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `flightNum` int(4) NOT NULL,
+  `depCity` varchar(3) NOT NULL,
+  `arrCity` varchar(3) NOT NULL,
+  `depDate` date NOT NULL,
+  `arrDate` date NOT NULL,
+  `depTime` time NOT NULL,
+  `arrTime` time DEFAULT NULL,
+  `distance` int(4) DEFAULT NULL,
+  `stopType` varchar(15) DEFAULT NULL,
+  `region` varchar(15) DEFAULT NULL,
+  `ticketPrice` decimal(6,2) NOT NULL,
+  `fcTicketPrice` decimal(6,2) DEFAULT NULL,
+  `seats` int(3) NOT NULL DEFAULT '150',
+  `seatsRem` int(3) NOT NULL DEFAULT '150',
+  `numRows` int(2) NOT NULL DEFAULT '30',
+  `numSeatsPerRow` int(2) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `flightNum_depCity_depDate_depTime` (`flightNum`,`depCity`,`depDate`,`depTime`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8
+
+-------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE `cities` (
+  `Id` decimal(2,0) NOT NULL,
+  `depCity` varchar(3) NOT NULL,
+  `arCityOne` varchar(3) NOT NULL,
+  `arCityTwo` varchar(3) DEFAULT NULL,
+  `arCityThr` varchar(3) DEFAULT NULL,
+  `arCityFor` varchar(3) DEFAULT NULL,
+  `arCityFve` varchar(3) DEFAULT NULL,
+  `arCitySix` varchar(3) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+-------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE `reservation` (
+  `ticketNum` int(8) NOT NULL AUTO_INCREMENT,
+  `fID` int(11) NOT NULL,
+  `flightNum` int(4) NOT NULL,
+  `ssn` int(9) NOT NULL,
+  `depCity` varchar(3) NOT NULL,
+  `arrCity` varchar(3) NOT NULL,
+  `depDate` date NOT NULL,
+  `depTime` time NOT NULL,
+  `seat` varchar(5) DEFAULT NULL,
+  `seatClass` varchar(12) DEFAULT 'Economy',
+  PRIMARY KEY (`ticketNum`),
+  UNIQUE KEY `ticketNum_UNIQUE` (`ticketNum`),
+  UNIQUE KEY `ssn_fID` (`ssn`,`fID`),
+  UNIQUE KEY `fID_seat` (`fID`,`seat`),
+  KEY `fID_flight_idx` (`fID`),
+  KEY `fID_flightID_idx` (`fID`),
+  CONSTRAINT `res_flight_fk` FOREIGN KEY (`fID`) REFERENCES `flight` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `res_user_fk` FOREIGN KEY (`ssn`) REFERENCES `user` (`SSN`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8
