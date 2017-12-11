@@ -617,7 +617,7 @@ public class User extends Database {
 		return userResult;	
 	}
 	
-	public void register() {
+	public User register(User u) {
 		
 		try {
 			
@@ -628,17 +628,17 @@ public class User extends Database {
 		
 			PreparedStatement userInsert = c.prepareStatement(insertStatement);
 		
-			userInsert.setInt   (1, this.ssn);
-			userInsert.setString(2, this.fName);
-			userInsert.setString(3, this.lName);
-			userInsert.setString(4, this.address);
-			userInsert.setInt   (5, this.zip);
-			userInsert.setString(6, this.state);
-			userInsert.setString(7, this.userName);
-			userInsert.setString(8, this.password);
-			userInsert.setString(9, this.email);
-			userInsert.setString(10,this.securityQuestion);
-			userInsert.setString(11,this.securityAnswer);
+			userInsert.setInt   (1, u.ssn);
+			userInsert.setString(2, u.fName);
+			userInsert.setString(3, u.lName);
+			userInsert.setString(4, u.address);
+			userInsert.setInt   (5, u.zip);
+			userInsert.setString(6, u.state);
+			userInsert.setString(7, u.userName);
+			userInsert.setString(8, u.password);
+			userInsert.setString(9, u.email);
+			userInsert.setString(10,u.securityQuestion);
+			userInsert.setString(11,u.securityAnswer);
 			
 			userInsert.executeUpdate();
 		}
@@ -646,6 +646,8 @@ public class User extends Database {
 		catch (Exception e){
 			e.printStackTrace();		
 		}
+		
+		return u;
 	}
 	
 	public void register(int ssn, String fName, String lName, String address, int zip, String state, String userName, String password, String email, String securityQuestion, String securityAnswer) {
