@@ -37,30 +37,4 @@ public class Database {
 		return dbPassword;
 	}
 	
-	//public String getTable() {
-	//	return table;
-	//}
-
-	//public void setTable(String table) {
-	//	this.table = table;
-	//}
-	
-	//public Connection connect() {
-		//try {
-			//Class.forName("com.mysql.jdbc.Driver");
-			//Connection c = DriverManager.getConnection(this.getConnectionID(), this.getUsername(), this.getPassword());
-			//return c;
-		//}
-		
-		//catch (Exception e) {
-			//e.printStackTrace();
-		//}
-	//}
-	
-//	public void disconnect(<>) {
-//		this
-//	}
-
-
-	
 }
