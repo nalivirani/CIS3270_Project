@@ -19,9 +19,11 @@ public class User extends Database {
 	protected int permissionLevel;
 	
 	public User() {
+		super();
 	}
 	
 	public User(int ssn, String fName, String lName, String address, int zip, String state, String username, String password, String email, String securityQuestion, String securityAnswer) {
+		super();
 		this.ssn = ssn;
 		this.fName = fName;
 		this.lName = lName;
@@ -33,6 +35,12 @@ public class User extends Database {
 		this.email = email;
 		this.securityQuestion = securityQuestion;
 		this.securityAnswer = securityAnswer;
+	}
+	
+	public User(String username) {
+		super();
+		this.userName = username;
+		
 	}
 
 	public int getSsn() {
@@ -51,6 +59,8 @@ public class User extends Database {
 			ResultSet rs = userQuery.executeQuery();
 			
 			ssn = rs.getInt("SSN"); 
+			
+			c.close();
 		}
 		
 		catch(Exception e) {
@@ -155,6 +165,14 @@ public class User extends Database {
  * *-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/*
  * **********************************************************************************/	
 	
+	@Override
+	public String toString() {
+		
+		return "User: " + this.getUserName() + "\nName: " + this.getfName() + " " + this.getlName() +
+				"\nAddress: " + this.getAddress() + " " + this.getState() + " " + this.getZip() +
+				"\nemail: " + this.getEmail() + "\nSSN: " + this.getSsn();
+	}
+	
 	public boolean canLogin(String username) {
 		if(!this.isNewUser(this.getSsn(username))) {
 			return true;
@@ -163,40 +181,52 @@ public class User extends Database {
 	}
 	
 	public User login(String username, String password) {
-		User currentUser = new User();
-		if(this.canLogin(username)) {
+		User u = new User(username);
+
 			try {
 				Connection c = DriverManager.getConnection(super.getConnectionID(), super.getDBusername(), super.getDBpassword());
 			
-				String query = "select * from user Where Username=?";
+				String query = "select * from user Where UserName=? and Password=?";
 				PreparedStatement userQuery = c.prepareStatement(query);
 				userQuery.setString(1, username);
+				userQuery.setString(2, password);
 			
 				ResultSet rs = userQuery.executeQuery();
 				
 				while(rs.next()) {
-					currentUser.setSsn(rs.getInt("SSN"));
-					currentUser.setfName(rs.getString("FirstName"));
-					currentUser.setlName(rs.getString("LastName"));
-					currentUser.setAddress(rs.getString("address"));
-					currentUser.setZip(rs.getInt("zip"));
-					currentUser.setState(rs.getString("State"));
-					currentUser.setUserName(rs.getString("UserName"));
-					currentUser.setPassword(rs.getString("Password"));
-					currentUser.setSecurityQuestion(rs.getString("email"));
-					currentUser.setEmail(rs.getString("SecurityQuestion"));
-					currentUser.setSecurityAnswer(rs.getString("SecurityAnswer"));
-					currentUser.setPermissionLevel(rs.getInt("PermissionLevel"));
+					u.setSsn(rs.getInt("SSN"));
+					u.setfName(rs.getString("FirstName"));
+					u.setlName(rs.getString("LastName"));
+					u.setAddress(rs.getString("address"));
+					u.setZip(rs.getInt("zip"));
+					u.setState(rs.getString("State"));
+					u.setUserName(rs.getString("UserName"));
+					u.setPassword(rs.getString("Password"));
+					u.setEmail(rs.getString("email"));
+					u.setSecurityQuestion(rs.getString("SecurityQuestion"));
+					u.setSecurityAnswer(rs.getString("SecurityAnswer"));
+					u.setPermissionLevel(rs.getInt("PermissionLevel"));
+					
+				
 				}
 				c.close();
+				
+				if (u.getfName() != null ) {
+				
+					System.out.println("Logging in...");
+					Thread.sleep(2000);
+					System.out.println("\nWelcome back, " + u.userName + " !");
+			}
+				
 			}
 			
 			catch(Exception e) {
 				
+				System.out.println("Login unsuccessful. Please verify your login credentials and try again.");
 			}
-		}
+
+		return u;
 		
-		return currentUser;
 	}
 	
 	public void logout() {
@@ -225,6 +255,8 @@ public class User extends Database {
 			userUpdate.setString(1, newFname);
 			userUpdate.setInt(2, ssn);
 			userUpdate.executeUpdate();
+			
+			c.close();
 		}
 		
 		catch(Exception e) {
@@ -245,6 +277,8 @@ public class User extends Database {
 			userUpdate.setInt(2, ssn);
 			
 			userUpdate.executeUpdate();
+			
+			c.close();
 		}
 		
 		catch(Exception e) {
@@ -265,6 +299,8 @@ public class User extends Database {
 			userUpdate.setInt(2, ssn);
 			
 			userUpdate.executeUpdate();
+			
+			c.close();
 		}
 		
 		catch(Exception e) {
@@ -285,6 +321,8 @@ public class User extends Database {
 			userUpdate.setInt(2, ssn);
 			
 			userUpdate.executeUpdate();
+			
+			c.close();
 		}
 		
 		catch(Exception e) {
@@ -305,6 +343,8 @@ public class User extends Database {
 			userUpdate.setInt(2, ssn);
 			
 			userUpdate.executeUpdate();
+			
+			c.close();
 		}
 		
 		catch(Exception e) {
@@ -325,6 +365,8 @@ public class User extends Database {
 			userUpdate.setInt(2, ssn);
 			
 			userUpdate.executeUpdate();
+			
+			c.close();
 		}
 		
 		catch(Exception e) {
@@ -345,6 +387,8 @@ public class User extends Database {
 			userUpdate.setInt(2, ssn);
 			
 			userUpdate.executeUpdate();
+			
+			c.close();
 		}
 		
 		catch(Exception e) {
@@ -364,6 +408,8 @@ public class User extends Database {
 			userUpdate.setInt(2, ssn);
 			
 			userUpdate.executeUpdate();
+			
+			c.close();
 		}
 		
 		catch(Exception e) {
@@ -384,6 +430,8 @@ public class User extends Database {
 			userUpdate.setInt(2, ssn);
 			
 			userUpdate.executeUpdate();
+			
+			c.close();
 		}
 		
 		catch(Exception e) {
@@ -404,6 +452,8 @@ public class User extends Database {
 			userUpdate.setInt(2, ssn);
 			
 			userUpdate.executeUpdate();
+			
+			c.close();
 		}
 		
 		catch(Exception e) {
@@ -411,8 +461,8 @@ public class User extends Database {
 		}
 	}
 
-	public String updatePermission(int ssn, String adminOverridePassowrd) {
-		if (adminOverridePassowrd.equals("zaq12wsxZAQ!@WSX")) {
+	public void adminPermission(int ssn, String adminOverridePassowrd) {
+		if (adminOverridePassowrd.equals("zaq12wsxZAQ!@WSX") && this.permissionLevel == 0) {
 			
 			try {
 				Connection c = DriverManager.getConnection(super.getConnectionID(), super.getDBusername(), super.getDBpassword());
@@ -426,18 +476,52 @@ public class User extends Database {
 				userUpdate.executeUpdate();
 				
 				this.permissionLevel = 1;
-				return "Your account privileges have been upgraded to admin capabilites.";
+				c.close();
+				
+				System.out.println("The user's account privileges have been updated. The user now has admin rights.");
 			}	
 			
 			catch(Exception e) {
-				return "something went wrong, please try again.";
+				System.out.println("something went wrong, please try again.");
 			}
 		}
 		
-		else return "The admin override password entered was invalid.";
+		else if (this.permissionLevel == 1) {
+			System.out.println("This user already has admin rights.");
+		}
+		
+		else System.out.println("The admin override password entered was invalid.");
 	}
 	
-	@SuppressWarnings("finally")
+	public void revokeAdminPermission(int ssn, String adminOverridePassowrd) {
+		
+		if (adminOverridePassowrd.equals("zaq12wsxZAQ!@WSX")) {
+			
+			try {
+				Connection c = DriverManager.getConnection(super.getConnectionID(), super.getDBusername(), super.getDBpassword());
+			
+				String update = "update user set PermissionLevel = ? where SSN = ?";
+			
+				PreparedStatement userUpdate = c.prepareStatement(update);
+				userUpdate.setInt(1, 0);
+				userUpdate.setInt(2, ssn);
+				
+				userUpdate.executeUpdate();
+				
+				System.out.println("The user's account privileges have been updated. The user now has admin rights.");
+				
+				this.permissionLevel = 0;
+				c.close();
+			}	
+			
+			catch(Exception e) {
+				System.out.println("something went wrong, please try again.");
+			}
+		}
+		
+		else System.out.println("The admin override password entered was invalid.");
+	}
+	
 	public boolean isNewUser(int ssn) {
 		boolean b = false;
 		
@@ -460,13 +544,10 @@ public class User extends Database {
 		
 			catch(Exception e) {
 			}
-		
-		finally {
+
 			return b;
-		}
 	}
 	
-	@SuppressWarnings("finally")
 	public boolean isNewUser(String username) {
 		boolean b = false;
 		
@@ -490,14 +571,12 @@ public class User extends Database {
 			catch(Exception e) {
 			}
 		
-		finally {
 			return b;
-		}
 	}
 	
-	public void pQuery(String username) {
+	public User getUser(String username) {
 		
-		System.out.println("\nDatabase: " + super.schema +"\nTable: " + User.TABLE);
+		User userResult = new User();
 		
 		try {
 			Connection c = DriverManager.getConnection(super.getConnectionID(), super.getDBusername(), super.getDBpassword());
@@ -511,24 +590,19 @@ public class User extends Database {
 		
 			while (rs.next()) {
 		
-				int ssn = rs.getInt("SSN");
-				String firstName = rs.getString("FirstName");
-				String lastName = rs.getString("LastName");
-				String address = rs.getString("address");
-				int zip = rs.getInt("zip");
-				String state = rs.getString("State");
-				String userName = rs.getString("UserName");
-				String password = rs.getString("Password");
-				String email = rs.getString("email");
-				String securityQuestion = rs.getString("SecurityQuestion");
-				String securityAnswer = rs.getString("SecurityAnswer");
-				int permission = rs.getInt("PermissionLevel");
+				userResult.setSsn(rs.getInt("SSN"));
+				userResult.fName = rs.getString("FirstName");
+				userResult.lName = rs.getString("LastName");
+				userResult.address = rs.getString("address");
+				userResult.zip = rs.getInt("zip");
+				userResult.state = rs.getString("State");
+				userResult.userName = rs.getString("UserName");
+				userResult.password = rs.getString("Password");
+				userResult.email = rs.getString("email");
+				userResult.securityQuestion = rs.getString("SecurityQuestion");
+				userResult.securityAnswer = rs.getString("SecurityAnswer");
+				userResult.setPermissionLevel(rs.getInt("PermissionLevel"));
 				
-				System.out.println("\n   SSN  |  FName | LName |    address    | zip |State|  uName  |  Password  |       email       | SecurityQuestion |        SecurityAnswer        | Admin? |");
-				
-				System.out.print(ssn + ",  " + firstName + ", " + lastName + ", " + address + ", " + zip + ", " 
-						   + state + ", " + userName + ", " + password + ", " + email + ", " + securityQuestion + ", " 
-						   + securityAnswer + ", " + permission);
 			}
 			
 			if (!rs.next()) {
@@ -540,9 +614,7 @@ public class User extends Database {
 			e.printStackTrace();
 		}
 		
-		finally {
-			System.out.println("\n");
-		}
+		return userResult;	
 	}
 	
 	public void register() {
