@@ -20,10 +20,13 @@ public class ConfirmSignUp {
 		window.setMinWidth(600);
 		window.setMinHeight(600);
 		
-		String str = "Customer";
+		String str = "~set permission level~";
 		
 		if(xyz.getPermissionLevel() == 1){
 			str = "Admin";
+			
+		}else{
+			str = "Customer";
 		}
 		
 		Label fname = new Label("First Name: 	" + xyz.getfName());
@@ -32,7 +35,7 @@ public class ConfirmSignUp {
 		Label zip = new Label("Zip Code: 	" + Integer.toString(xyz.getZip()));
 		Label st = new Label("State: 	" + xyz.getState());
 		Label email = new Label("Email: 	" + xyz.getEmail());
-		Label usr = new Label("Username: 	" + xyz.getUsername());
+		Label usr = new Label("Username: 	" + xyz.getUserName());
 		Label pss = new Label("Password: 	" + xyz.getPassword());
 		Label ssn = new Label("Social Security Number: 	" + Integer.toString(xyz.getSsn()));
 		Label secQ = new Label("Security Question: 	" + xyz.getSecurityQuestion());
@@ -45,6 +48,8 @@ public class ConfirmSignUp {
 		Button confirmButton = new Button("Confirm");		
 		confirmButton.setOnAction(e -> {
 			confirm = !confirm;
+			User u = xyz.register(xyz);
+			xyz.adminPermission(xyz);
 			window.close();
 		});		
 		

@@ -60,6 +60,19 @@ public class LoginWindow{
 		
 		//Login action
 		loginButton.setOnAction(e -> {
+			User u = new User();
+			u = u.getUser(usernameInput.getText());
+			if(u.isNewUser(u.getUserName())){
+				SignUpWindow.display();
+			}else if(usernameInput.getText().equals(u.getUserName()) 
+					&& passInput.getText().equals(u.getPassword()) && u.getPermissionLevel()==0){
+				window.setScene(CustomerMenu.display(u));
+			}else if(usernameInput.getText().equals(u.getUserName()) 
+					&& passInput.getText().equals(u.getPassword()) && u.getPermissionLevel()==1){
+				window.setScene(AdminMenu.display(u));
+			}else{
+				AlertBox1.display("Login Error", "Please check your credentials");
+			}
 //			if(xyz.getUsername() == usernameInput.getText() && xyz.getPassword() == passInput.getText() 
 //					&& xyz.getPermissionLevel() == 0){
 //				window.setScene(CustomerMenu.display());
@@ -70,14 +83,14 @@ public class LoginWindow{
 //				AlertBox1.display("Login Error", "Please try again");
 //			}
 			
-			if(username.equals(usernameInput.getText()) && password.equals(passInput.getText()) && adm == 0){
-				window.setScene(CustomerMenu.display());
-			}else if(username.equals(usernameInput.getText()) && password.equals(passInput.getText()) && adm == 1){
-				window.setScene(AdminMenu.display());
-			}else{
-				AlertBox1.display("Login Error", "Please try again");
-			}
-			
+//			if(username.equals(usernameInput.getText()) && password.equals(passInput.getText()) && adm == 0){
+//				window.setScene(CustomerMenu.display());
+//			}else if(username.equals(usernameInput.getText()) && password.equals(passInput.getText()) && adm == 1){
+//				window.setScene(AdminMenu.display());
+//			}else{
+//				AlertBox1.display("Login Error", "Please check your credentials");
+//			}
+//			
 			
 			//window.close();
 		});

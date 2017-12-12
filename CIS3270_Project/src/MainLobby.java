@@ -9,24 +9,68 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.awt.SplashScreen;
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-public class MainLobby extends Application {
-	
+public class MainLobby extends Application{
 	Stage main_window, signUp_window, login_window;
 	Scene lobby, main_scene;
 	
 	public static void main(String[] args){
-		launch(args);
-		//User us = new User();
+		try {
+			Thread.sleep(6200);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
-		//us.pQuery("Admin234");
+		try {
+	        SplashScreen splashScreen = SplashScreen.getSplashScreen();//getSplashScreen();
+	        if (splashScreen!=null) splashScreen.close();
+	    } catch (Exception e) {}
+		
+		launch(args);
+//		User us = new User();
+//		
+//		us.login("Admin234","P@s$w0Rd321");
+//		us.getUserName();
+//		us.getfName();
+		
+//		Flight f1 = new Flight();
+//		LocalDate lc = LocalDate.of(2017, 12,  10);
+		
+//		ArrayList<Flight> arr = new ArrayList<>(f1.searchFlights("ATL", "ORD", lc));
+		
+//		if(arr.isEmpty()) {
+//			System.out.println("It looks like we didn't find any flights matching your criteria. " +
+//							   "Try your search again with a different city or departure date.");
+//		}
+//		
+//		//f.updateArrDate(1, LocalDate.of(2017, 12, 25));
+//		
+//		else {
+//			Iterator<Flight> i = arr.iterator();
+//			while (i.hasNext()) {
+//				System.out.print(i.next());
+//			}
+//		}
+
+		
 	}
-	
 
 	@Override
 	public void start(Stage main_window) throws Exception {
 
+		try { 
+			Thread.sleep(300);
+			
+		}finally{}
+//		catch (InterruptException ie) {
+//			
+//		}
+		
 		Label header = new Label("Flights Galore");
 		Button loginButton = new Button("Login");
 		Button signUpButton = new Button("Sign Up");
@@ -53,11 +97,5 @@ public class MainLobby extends Application {
 		
 	}
 	
-//	public static Scene sceneSetter(Scene scene){
-//		if(LoginWindow.auth == false){
-//			return scene;
-//		}else{
-//			return CustomerMenu.scene;
-//		}
-//	}
 }
+

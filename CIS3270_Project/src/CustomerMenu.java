@@ -7,13 +7,16 @@ import javafx.stage.Stage;
 
 public class CustomerMenu{
 
-	public static Scene display() {
+	public static Scene display(User tempUser) {
 		Stage window = new Stage();
 		
 		Button searchButton = new Button("Find Flights");
 		Button manageReservationsButton = new Button("Manage Reservations");
 		GridPane.setConstraints(searchButton, 4,3);
 		GridPane.setConstraints(manageReservationsButton, 4,4);
+		
+		searchButton.setOnAction(e -> FlightFind.display());
+		manageReservationsButton.setOnAction(e -> ManageReservations.display(tempUser));
 		
 		GridPane grid = new GridPane();
 		grid.getChildren().addAll(searchButton,manageReservationsButton);
@@ -22,9 +25,8 @@ public class CustomerMenu{
 		grid.setHgap(10);
 			
 		Scene scene = new Scene(grid, 300, 500);
+		
 		return scene;
-		//window.setScene(scene);
-		//window.show();
 		
 	}
 	

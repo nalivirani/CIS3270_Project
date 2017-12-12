@@ -6,8 +6,8 @@ import javafx.stage.Stage;
 
 public class AdminMenu {
 	
-	public static Scene display() {
-		Stage window = new Stage();
+	public static Scene display(User tempUser) {
+		//Stage window = new Stage();
 		
 		Button searchButton = new Button("Find Flights");
 		Button manageReservationsButton = new Button("Manage Reservations");
@@ -18,6 +18,7 @@ public class AdminMenu {
 		
 		searchButton.setOnAction(e -> FlightFind.display());
 		manageFlightsButton.setOnAction(e -> ManageFlight.display());
+		manageReservationsButton.setOnAction(e -> ManageReservations.display(tempUser));
 		
 		GridPane grid = new GridPane();
 		grid.getChildren().addAll(searchButton,manageReservationsButton, manageFlightsButton);

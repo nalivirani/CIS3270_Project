@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 public class SignUpWindow {
 	static int r = 2;
 	static int c = 2;
-	static User xyz = new User();
 
 	public static final Font ITALIC_FONT =
             Font.font(
@@ -146,7 +145,7 @@ public class SignUpWindow {
 		GridPane.setConstraints(passInput, c+1, r+4);
 		
 		//password disclaimer
-		Text passInfo = new Text ("(password is case sensitive)");
+		Text passInfo = new Text ("(username and password are case sensitive)");
 		GridPane.setConstraints(passInfo, c+2, r+4);
 		GridPane.setHalignment(passInfo, HPos.CENTER);
 		passInfo.setFont(ITALIC_FONT);
@@ -208,28 +207,35 @@ public class SignUpWindow {
 		
 		
 		signUpButton.setOnAction(e -> {
-			xyz.setfName(firstNameInput.getText());
-			xyz.setlName(lastNameInput.getText());
-			xyz.setAddress(addressInput.getText());
-			xyz.setZip(Integer.parseInt(zipInput.getText()));
-			xyz.setState(state.getValue());
-			xyz.setEmail(emailInput.getText());
-			xyz.setUserName(usernameInput.getText());
-			xyz.setPassword(passInput.getText());
-			xyz.setSsn(Integer.parseInt(ssnInput.getText()));
-			xyz.setSecurityQuestion(question.getValue());
-			xyz.setSecurityAnswer(recoveryAnswerInput.getText());
-			if(adminInput.equals("Fried Chicken")){
-				xyz.setPermissionLevel(1);
-			}else{
-				xyz.setPermissionLevel(0);
-			}
-			ConfirmSignUp.display(xyz);
-			if(ConfirmSignUp.confirm == true){
-				window.close();
-			}else{
-				window.showAndWait();
-			}
+			User tempUser = new User();
+			if(tempUser.isNewUser(Integer.parseInt(ssnInput.getText())) && tempUser.isNewUser(usernameInput.getText())){
+				tempUser.setfName(firstNameInput.getText());
+				tempUser.setlName(lastNameInput.getText());
+				tempUser.setAddress(addressInput.getText());
+				tempUser.setZip(Integer.parseInt(zipInput.getText()));
+				tempUser.setState(state.getValue());
+				tempUser.setEmail(emailInput.getText());
+				tempUser.setUserName(usernameInput.getText());
+				tempUser.setPassword(passInput.getText());
+				tempUser.setSsn(Integer.parseInt(ssnInput.getText()));
+				tempUser.setSecurityQuestion(question.getValue());
+				tempUser.setSecurityAnswer(recoveryAnswerInput.getText());
+				if(adminInput.getText().equals("zaq12wsxZAQ!@WSX")){
+					tempUser.setPermissionLevel(1);
+				}else{
+					tempUser.setPermissionLevel(0);
+				}
+				//User u = tempUser.register(tempUser);
+				System.out.println(tempUser.getPermissionLevel());
+				ConfirmSignUp.display(tempUser);
+				if(ConfirmSignUp.confirm == true){
+					window.close();
+				}
+//				}else{
+//					window.showAndWait();
+//				}
+				}
+			
 		});
 		
 		cancelButton.setOnAction(e -> window.close());
@@ -247,7 +253,7 @@ public class SignUpWindow {
 		window.setScene(scene);
 		window.showAndWait();
 		
-		System.out.println(xyz.toString());
+		//System.out.println(xyz.toString());
 	}
 	
 }
