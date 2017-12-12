@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -22,17 +23,21 @@ public class ManageReservations {
 	public static void display(User tempUser) {
 		
 		Stage window = new Stage();
+		BorderPane border = new BorderPane();
 		
 		Reservation tempReservation = new Reservation();
+		
+		Button deleteReservation = new Button("Delete reservation");
 
 		//flightnum cl
-		TableColumn<Reservation, Integer> flightNum = new TableColumn<>("Flight Number");
-		flightNum.setMinWidth(150);
-		flightNum.setCellValueFactory(new PropertyValueFactory<>("flightNum"));
 		
 		TableColumn<Reservation, Integer> ticketNum = new TableColumn<>("Ticket Number");
 		ticketNum.setMinWidth(150);
 		ticketNum.setCellValueFactory(new PropertyValueFactory<>("TicketNum"));
+		
+		TableColumn<Reservation, Integer> flightNum = new TableColumn<>("Flight Number");
+		flightNum.setMinWidth(150);
+		flightNum.setCellValueFactory(new PropertyValueFactory<>("flightNum"));
 		
 		TableColumn<Reservation, String> depCity = new TableColumn<>("Departure City");
 		depCity.setMinWidth(250);
@@ -52,12 +57,20 @@ public class ManageReservations {
 		
 		List<Reservation> rearr = new ArrayList<>(tempReservation.searchReservations(tempUser.getSsn()));
 		ObservableList<Reservation> reservationsFound = FXCollections.observableArrayList(rearr);		
-		reservationsFound.addAll(rearr); 
+		//reservationsFound.addAll(rearr); 
 		
 		reservations = new TableView<>();
 		
-		reservations.getColumns().addAll(flightNum,ticketNum, depCity,arrCity, depDate, arrDate);
+		reservations.getColumns().addAll(ticketNum, flightNum, depCity,arrCity, depDate);
 		reservations.setItems(reservationsFound);
+		
+		deleteReservation.setOnAction(e -> {
+			Reservation temp = new Reservation();
+			temp = reservations.getSelectionModel().getSelectedItems().get(0);
+			deleteButtonClicked();
+			temp.deleteReservation(temp);
+		
+		});
 		
 //		GridPane grid = new GridPane();			
 //		grid.setPadding(new Insets(20));
@@ -65,8 +78,9 @@ public class ManageReservations {
 //		grid.setHgap(10);
 //		grid.getChildren().addAll(reservations);
 		
+		border.setBottom(deleteReservation);
 		VBox vBox = new VBox();
-		vBox.getChildren().addAll(reservations);
+		vBox.getChildren().addAll(reservations, border);
 				
 		Scene scene = new Scene(vBox);
 		window.setScene(scene);
@@ -80,6 +94,16 @@ public class ManageReservations {
 //	rervations.addAll(r1);
 //		return flights;
 //	}
+	
+	public static void deleteButtonClicked(){
+		//Reservation r = new Reservation();
+		ObservableList<Reservation> reservationSelected, allReservations;
+		allReservations = reservations.getItems();
+		reservationSelected = reservations.getSelectionModel().getSelectedItems();
+		reservationSelected.forEach(allReservations::remove);
+		//((Reservation) reservationSelected).deleteReservation(r); 
+	}
+	
 		
 		
 

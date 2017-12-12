@@ -98,7 +98,7 @@ public class LoginWindow{
 		cancelButton.setOnAction(e -> window.close());
 		
 		//forgot pass action
-		forgotPassButton.setOnAction(e -> window.close());
+		forgotPassButton.setOnAction(e -> RecoverPassword.display());
 
 		
 		GridPane.setConstraints(loginButton, 2, 3);

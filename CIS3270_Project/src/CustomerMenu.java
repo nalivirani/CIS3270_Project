@@ -15,7 +15,7 @@ public class CustomerMenu{
 		GridPane.setConstraints(searchButton, 4,3);
 		GridPane.setConstraints(manageReservationsButton, 4,4);
 		
-		searchButton.setOnAction(e -> FlightFind.display());
+		searchButton.setOnAction(e -> FlightFind.display(tempUser));
 		manageReservationsButton.setOnAction(e -> ManageReservations.display(tempUser));
 		
 		GridPane grid = new GridPane();

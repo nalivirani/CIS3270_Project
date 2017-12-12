@@ -4,6 +4,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -33,7 +35,7 @@ public class ManageFlight {
 	static TextField tPrice;
 	
 	@SuppressWarnings("unchecked")
-	public static void display(){
+	public static void display(User tempUser){
 		
 //		//flight 1 object
 //		Flight f1 = new Flight(4325, null);
@@ -247,9 +249,11 @@ public class ManageFlight {
 		daySearchDrop.setValue(2017);
 		
 //		String month = monthSearchDrop.getValue();
-//		int a = Validator.intReturn(month);
-//		LocalDate depLocDate = LocalDate.of(yearSearchDrop.getValue(), a , daySearchDrop.getValue());
-//		
+//		int mon = Validator.intReturn(month);
+//		int year = yearSearchDrop.getValue();
+//		int day = daySearchDrop.getValue();
+//		LocalDate depLocDate = LocalDate.of(year, mon ,day );
+
 		//month drop down
 		ComboBox<String> monthSearchDrop2 = new ComboBox<>();
 		monthSearchDrop.getItems().addAll("January", "February", "March", "April", "May", "June",
@@ -267,7 +271,12 @@ public class ManageFlight {
 		daySearchDrop.getItems().addAll(2017,2018);
 		daySearchDrop.setValue(2017);
 		
-		LocalDate arrLocDate = LocalDate.of(yearSearchDrop2.getValue(), Validator.intReturn(monthSearchDrop2.getValue()), daySearchDrop2.getValue());
+//		String month1 = monthSearchDrop2.getValue();
+//		int mon1 = Validator.intReturn(month1);
+//		int year1 = yearSearchDrop2.getValue();
+//		int day1 = daySearchDrop2.getValue();
+//		LocalDate arrLocDate = LocalDate.of(year1, mon1 ,day1);
+		//LocalDate arrLocDate = LocalDate.of(yearSearchDrop2.getValue(), 1, daySearchDrop2.getValue());
 		
 		//hour dropdown
 		ComboBox<String> hourDrop = new ComboBox<>();
@@ -301,10 +310,11 @@ public class ManageFlight {
 		
 		LocalTime depLocTime = LocalTime.of(depHour, depMinute);
 		LocalTime arrLocTime = LocalTime.of(arrHour, arrMinute);
-		double tp = Double.parseDouble(tPrice.getText());
+//		double tp = Double.parseDouble(tPrice.getText());
+//		
+//		BigDecimal realTicketPrice = new BigDecimal(tp);
 		
-		BigDecimal realTicketPrice = new BigDecimal(tp);
-		
+		BigDecimal price = new BigDecimal(100.00);
 		
 		//Buttons
 		Button addButton = new Button("Add");
@@ -315,10 +325,16 @@ public class ManageFlight {
 			f.setDepCity(depCityInput.getText());
 			f.setArrCity(arrCityInput.getText());
 			f.setDepDate(null);
-			f.setArrDate(arrLocDate);
+			f.setArrDate(null);
 			f.setDepTime(depLocTime);
 			f.setArrTime(arrLocTime);
-			addButtonClicked(f);
+			f.setTicketPrice(price);
+			try {
+				addButtonClicked(f, tempUser);
+			} catch (MySQLIntegrityConstraintViolationException e1) {
+				// TODO Auto-generated catch block
+				AlertBox1.display("Error", "This flight is already booked");
+			}
 			List<Flight> flarr = new ArrayList<>(f.searchFlights(f.fID));
 			//flarr = f1.searchFlights(depCityDrop.getValue(), arrCityDrop.getValue(), lc);
 			ObservableList<Flight> flightsFound = FXCollections.observableArrayList(flarr);
@@ -343,7 +359,9 @@ public class ManageFlight {
 	    		hourArrDrop, minuteArrDrop );
 		//flightIDInput , searchByIDButton, orSearchByLabel
 		VBox vBox2 = new VBox();
-		vBox2.getChildren().addAll(flightIDInput, depCityInput, arrCityInput, addButton, deleteButton);
+		vBox2.getChildren().addAll(flightIDInput, depCityInput, arrCityInput, monthSearchDrop, daySearchDrop, yearSearchDrop, 
+	    		monthSearchDrop2, daySearchDrop2, yearSearchDrop2, hourDrop, minuteDrop, 
+	    		hourArrDrop, minuteArrDrop, addButton, deleteButton);
 		vBox2.setPadding(new Insets(20, 50, 200, 10));
 		//vBox2.setCenterShape(true);
 		
@@ -365,7 +383,12 @@ public class ManageFlight {
 		//GridPane.setConstraints(flightIDInput, c + 5, r+10);
 		GridPane.setConstraints(searchByInfoButton, c, r + 12);
 		grid2.setStyle("-fx-background-color: DAE6F3;");
-
+//monthSearchDrop, daySearchDrop, yearSearchDrop, 
+//		monthSearchDrop2, daySearchDrop2, yearSearchDrop2, hourDrop, minuteDrop, 
+//		hourArrDrop, minuteArrDrop 
+		
+		
+		
 		border.setLeft(grid2);
 		border.setCenter(vBox2);
 		GridPane.setConstraints(border, 1 ,0);
@@ -394,9 +417,11 @@ public class ManageFlight {
 //		return flights;
 //	}
 	
-	public static void addButtonClicked(Flight f){
+	public static void addButtonClicked(Flight f, User u) throws MySQLIntegrityConstraintViolationException{
 		Flight tempF = new Flight();
+		Reservation tempR = new Reservation();
 		tempF.createFlight(f);
+		tempR.createReservation(tempF, u);
 	}
 	
 	public static void deleteButtonClicked(){

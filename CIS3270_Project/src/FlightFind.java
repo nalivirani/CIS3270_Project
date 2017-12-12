@@ -33,57 +33,29 @@ public class FlightFind {
 	static TableView<Flight> flights;
 	
 	@SuppressWarnings("unchecked")
-	public static void display(){
+	public static void display(User u){
 		
 		GridPane grid = new GridPane();
 		BorderPane border = new BorderPane();
 
-		//flight 1 object
-		//Flight f1 = new Flight();
-//		f1.setArrCity("ATL");
-//		f1.setDepCity("LA");
-//		f1.setDistance(894);
-//		f1.setSeatsRem(21);
-		
-//		//flight 2 object
-//		Flight f2 = new Flight(1832, null);
-//		f2.setArrCity("OR");
-//		f2.setDepCity("NY");
-//		f2.setDistance(641);
-//		f2.setSeatsRem(10);
-		
-//		Flight f1 = new Flight();
-//		LocalDate lc = LocalDate.of(2017, 12,  25);
-//		f1.searchFlights("ATL", null, lc);
-
 		Button searchByInfoButton = new Button("Search for Flights");
-		
+		Button addReservation = new Button("Add Reservation");
 		//labels
 		Label depCityLabel = new Label("Departure City: ");
 		Label arrCityLabel = new Label("Arrival City: ");
 		Label monthLabel = new Label("Month: ");
 		Label dayLabel = new Label("Day: ");
 		Label yearLabel = new Label("Year: ");
-//		GridPane.setValignment(depCityLabel, VPos.CENTER);
-//		GridPane.setHalignment(depCityLabel, HPos.LEFT);
-//		GridPane.setConstraints(depCityLabel, 1,0);
-		//grid.add(depCityLabel, 0, 0);
 								
 		//Departure City input ComboBox<String> question = new ComboBox<String>();
 		ComboBox<String> depCityDrop = new ComboBox<>();
 		depCityDrop.getItems().addAll("ATL", "ORD");
 		depCityDrop.setValue("Select");
-//		GridPane.setValignment(depCityLabel, VPos.CENTER);
-//		GridPane.setHalignment(depCityLabel, HPos.LEFT);
-//		GridPane.setConstraints(depCityLabel, 1,0);
 		
 		//Arrival City input
 		ComboBox<String> arrCityDrop = new ComboBox<>();
 		arrCityDrop.getItems().addAll("ATL", "ORD");
 		arrCityDrop.setValue("Select");
-//		GridPane.setValignment(depCityLabel, VPos.CENTER);
-//		GridPane.setHalignment(depCityLabel, HPos.LEFT);
-//		GridPane.setConstraints(depCityLabel, 1,0);
 
 
 		//month drop down
@@ -91,26 +63,17 @@ public class FlightFind {
 		monthDrop.getItems().addAll("January", "February", "March", "April", "May", "June",
 				"July", "August", "September", "October", "November", "December");
 		monthDrop.setValue("Month");
-//		GridPane.setValignment(depCityLabel, VPos.CENTER);
-//		GridPane.setHalignment(depCityLabel, HPos.LEFT);
-//		GridPane.setConstraints(depCityLabel, 1,0);
 		
 		//Day drop down
 		ComboBox<Integer> dayDrop = new ComboBox<>();
 		dayDrop.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 				19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31);
 		dayDrop.setValue(01);
-//		GridPane.setValignment(depCityLabel, VPos.CENTER);
-//		GridPane.setHalignment(depCityLabel, HPos.LEFT);
-//		GridPane.setConstraints(depCityLabel, 1,0);
 		
 		//Year drop down
 		ComboBox<Integer> yearDrop = new ComboBox<>();
 		yearDrop.getItems().addAll(2017,2018);
 		yearDrop.setValue(2017);
-//		GridPane.setValignment(depCityLabel, VPos.CENTER);
-//		GridPane.setHalignment(depCityLabel, HPos.LEFT);
-//		GridPane.setConstraints(depCityLabel, 1,0);
 //		
 		Stage window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
@@ -187,74 +150,37 @@ public class FlightFind {
 		seatsPerRow.setMinWidth(150);
 		seatsPerRow.setCellValueFactory(new PropertyValueFactory<>("seatsPerRow"));
 		
-		
-		
-//		searchButton.setOnAction(e -> {
-//			f1.searchFlights(null, null, null);
-//		});
-		// arr time
-		// dep time
-		
-		
-		//checkCity  f1.checkCity(depCity)
-		
-		//search button
-//		ArrayList<Flight> fArr = new 
-//				ArrayList<Flight>(f1.searchFlights(depCity.getText(), arrCity.getText(), lc));
-	//	ObservableList<Flight> flightsFound = FXCollections.observableArrayList();
-		//ArrayList<Flight> flightsFound = new ArrayList<>();
 		searchByInfoButton.setOnAction(e ->{
 			int m = Validator.intReturn(monthDrop.getValue());
 			LocalDate lc = LocalDate.of(yearDrop.getValue(), m, dayDrop.getValue());
 			Flight f1 = new Flight();
 			List<Flight> flarr = new ArrayList<>(f1.searchFlights(depCityDrop.getValue(), arrCityDrop.getValue(), lc));
-			//flarr = f1.searchFlights(depCityDrop.getValue(), arrCityDrop.getValue(), lc);
+
 			ObservableList<Flight> flightsFound = FXCollections.observableArrayList(flarr);
 			flights.setItems(flightsFound);
-//			Iterator<Flight> i = (f1.searchFlights(depCityDrop.getValue(), arrCityDrop.getValue(), lc)).iterator();
-//			
-//			
-//			while(i.hasNext()){
-//				System.out.println(i.next()); 
-//				flarr.add(i.next());
-//			}
-//			
-//				if(f1.searchFlights(depCityDrop.getValue(), arrCityDrop.getValue(), lc).isEmpty()) {
-//					System.out.println("It looks like we didn't find any flights matching your criteria. " +
-//									   "Try your search again with a different city or departure date.");
-//				}
-//				else{
-//					Iterator<Flight> x = flarr.iterator();
-//					while(x.hasNext()){
-//						System.out.println(x.next()); 
-//						flightsFound.add(x.next());
-//					}
-//					ArrayList<Flight> flarr = new ArrayList<>(f1.searchFlights(depCity.getText(), arrCity.getText(), lc));
-//					Iterator<Flight> i = flarr.iterator();
-//					while (i.hasNext()) {
-////					flarr.forEach(f1 = i.next());
-//					flightsFound.add(f1);
-					
-				});
-		//(f1.searchFlights(depCity.getText(), arrCity.getText(), lc))
-				//f.addAll(f1.searchFlights(depCity.getText(), arrCity.getText(), lc))
+			});
 		
-//				f.updateArrDate(1, LocalDate.of(2017, 12, 25));
-//				else {
-//					for(Flight s : f){
-//						f.addAll(f1.searchFlights(depCity.getText(), arrCity.getText(), lc));	
-//					}
-//				}
-				//else {
-					//ObservableList<Flight> arr = FXCollections.observableArrayList();
-			
-		//};
-//		});
-
+		addReservation.setOnAction(e ->{
+			Reservation temp = new Reservation();
+			Flight f = new Flight();
+			ObservableList<Flight> reservationSelected;
+			if(!flights.getSelectionModel().getSelectedItems().isEmpty()){
+				reservationSelected = flights.getSelectionModel().getSelectedItems();
+				f = reservationSelected.get(0);
+				f.setFlightNum(f.getFlightNum());
+				temp.createReservation(f, u);
+				AlertBox1.display("Sucess", "This flight is now reserved");
+			}else{
+				AlertBox1.display("No selection made", "Please make a selection!");
+			}
+		});
+		
 		flights = new TableView<>();
 		//flights.setItems(flightsFound);
 		flights.getColumns().addAll(flightnum, depCity, arrCity, depDate, arrDate, depTime, arrTime, 
 				ticketPrice, seatsRem);
+		
+		
 	
 		
 //		FlowPane flow = new FlowPane();
@@ -277,7 +203,8 @@ public class FlightFind {
 		grid2.setVgap(8);
 		grid2.setHgap(10);
 		grid2.getChildren().addAll(depCityLabel, depCityDrop, arrCityLabel, arrCityDrop, 
-	    		monthLabel, monthDrop,dayLabel, dayDrop, yearLabel, yearDrop, searchByInfoButton);
+	    		monthLabel, monthDrop,dayLabel, dayDrop, yearLabel, yearDrop, 
+	    		searchByInfoButton, addReservation);
 		int c = 0;
 		int r = (c+1) * 2;
 		GridPane.setConstraints(depCityLabel,c, r);
@@ -291,6 +218,7 @@ public class FlightFind {
 		GridPane.setConstraints(yearLabel, c, r + 8);
 		GridPane.setConstraints(yearDrop, c, r + 9);
 		GridPane.setConstraints(searchByInfoButton, c, r + 15);
+		GridPane.setConstraints(addReservation, c, r + 20);
 		grid2.setStyle("-fx-background-color: DAE6F3;");
 
 		border.setRight(grid2);

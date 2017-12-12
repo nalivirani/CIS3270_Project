@@ -26,7 +26,7 @@ public class Reservation extends Database{
 	protected String seatClass;
 	protected String seat;
 	
-	protected BigDecimal cost;
+	protected BigDecimal price;
 	
 
 	public Reservation() {
@@ -41,7 +41,7 @@ public class Reservation extends Database{
 	}
 
 	public Reservation(int ticketNum, int fID, int flightNUm, int ssn, String depCity, String arrCity, LocalDate depDate,
-					   LocalTime depTime, String seatClass, String seat, BigDecimal cost) {
+					   LocalTime depTime, String seatClass, String seat) {
 		super();
 		this.ticketNum = ticketNum;
 		this.fID = fID;
@@ -128,28 +128,28 @@ public class Reservation extends Database{
 	
 	
 	
-	public void createReservation(Flight f, User u, String seatClass) {
+	public void createReservation(Flight f, User u) {
 		
 		String sC = "";
 		BigDecimal price = new BigDecimal(0.00);
 		
-		if(seatClass.contains("first") || seatClass.contains("First")) {
-			sC = "First-Class";
-			price = f.fcTicketPrice;
-		}
-		
-		else {
-			sC = "Economy";
-			price = f.ticketPrice;
-		}
+//		if(seatClass.contains("first") || seatClass.contains("First")) {
+//			sC = "First-Class";
+//			price = f.fcTicketPrice;
+//		}
+//		
+//		else {
+//			sC = "Economy";
+//			price = f.ticketPrice;
+//		}
 		
 		try {
 			
 			Connection c = DriverManager.getConnection(super.getConnectionID(), super.getDBusername(), super.getDBpassword());
 		
 			String insertStatement = "insert into " + TABLE + " (fID, flightNum, ssn, depCity, arrCity, depDate, " + 
-								    						    "depTime, seat, seatClass, cost) " + 
-								    						    "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+								    						    "depTime, seat, seatClass) " + 
+								    						    "values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 			PreparedStatement reservationInsert = c.prepareStatement(insertStatement);
 		
@@ -162,7 +162,7 @@ public class Reservation extends Database{
 			reservationInsert.setString    (7, f.depTime.toString());
 			reservationInsert.setString    (8, "1 A");
 			reservationInsert.setString    (9, sC);
-			reservationInsert.setBigDecimal(10, price);
+			//reservationInsert.setBigDecimal(10, price);
 			
 			reservationInsert.executeUpdate();
 		}
@@ -190,7 +190,7 @@ public class Reservation extends Database{
 				
 				reservationDelete.setInt(1, r.ticketNum);
 				
-				System.out.println("The reservation was succesfully deleted.");
+				AlertBox1.display("Success", "This reservation was deleted");
 			}
 			
 			catch (Exception e) {
@@ -239,9 +239,7 @@ public class Reservation extends Database{
 										dTime.toLocalTime(),
 				
 										rs. getString("seat"),
-										rs.getString("seatClass"),
-				
-										rs.getBigDecimal("cost")
+										rs.getString("seatClass")
 				));
 			}
 		}

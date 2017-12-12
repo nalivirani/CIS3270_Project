@@ -16,8 +16,8 @@ public class AdminMenu {
 		GridPane.setConstraints(manageReservationsButton, 4,4);
 		GridPane.setConstraints(manageFlightsButton, 4,5);
 		
-		searchButton.setOnAction(e -> FlightFind.display());
-		manageFlightsButton.setOnAction(e -> ManageFlight.display());
+		searchButton.setOnAction(e -> FlightFind.display(tempUser));
+		manageFlightsButton.setOnAction(e -> ManageFlight.display(tempUser));
 		manageReservationsButton.setOnAction(e -> ManageReservations.display(tempUser));
 		
 		GridPane grid = new GridPane();
