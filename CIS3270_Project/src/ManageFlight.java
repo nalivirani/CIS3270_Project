@@ -28,8 +28,8 @@ public class ManageFlight {
 	static TableView<Flight> flights;
 	
 	static TextField flightNumInput;
-	static TextField depCityInput;
-	static TextField arrCityInput;
+	//static TextField depCityInput;
+	//static TextField arrCityInput;
 	static TextField flightIDInput;
 	static TextField flightNumberInput;
 	static TextField tPrice;
@@ -37,40 +37,8 @@ public class ManageFlight {
 	@SuppressWarnings("unchecked")
 	public static void display(User tempUser){
 		
-//		//flight 1 object
-//		Flight f1 = new Flight(4325, null);
-//		f1.setArrCity("ATL");
-//		f1.setDepCity("LA");
-//		f1.setDistance(894);
-//		f1.setSeatsRem(21);
-//		
-//		//flight 2 object
-//		Flight f2 = new Flight(1832, null);
-//		f2.setArrCity("OR");
-//		f2.setDepCity("NY");
-//		f2.setDistance(641);
-//		f2.setSeatsRem(10);
-		
 		GridPane grid = new GridPane();
 		BorderPane border = new BorderPane();
-
-		//flight 1 object
-		//Flight f1 = new Flight();
-//		f1.setArrCity("ATL");
-//		f1.setDepCity("LA");
-//		f1.setDistance(894);
-//		f1.setSeatsRem(21);
-		
-//		//flight 2 object
-//		Flight f2 = new Flight(1832, null);
-//		f2.setArrCity("OR");
-//		f2.setDepCity("NY");
-//		f2.setDistance(641);
-//		f2.setSeatsRem(10);
-		
-//		Flight f1 = new Flight();
-//		LocalDate lc = LocalDate.of(2017, 12,  25);
-//		f1.searchFlights("ATL", null, lc);
 
 		Button searchByInfoButton = new Button("Search for Flights");
 		Button searchByIDButton = new Button("Search by Flight ID");
@@ -78,33 +46,35 @@ public class ManageFlight {
 		//labels
 		Label orSearchByLabel = new Label(" ~ OR SEARCH BY ~ ");
 		
-		Label depCityLabel = new Label("Departure City: ");
-		Label arrCityLabel = new Label("Arrival City: ");
-		Label monthLabel = new Label("Month: ");
-		Label dayLabel = new Label("Day: ");
-		Label yearLabel = new Label("Year: ");
-//		GridPane.setValignment(depCityLabel, VPos.CENTER);
-//		GridPane.setHalignment(depCityLabel, HPos.LEFT);
-//		GridPane.setConstraints(depCityLabel, 1,0);
-		//grid.add(depCityLabel, 0, 0);
-								
-		//Departure City input ComboBox<String> question = new ComboBox<String>();
-		ComboBox<String> depCityDrop = new ComboBox<>();
-		depCityDrop.getItems().addAll("ATL", "ORD");
-		depCityDrop.setValue("Select");
-//		GridPane.setValignment(depCityLabel, VPos.CENTER);
-//		GridPane.setHalignment(depCityLabel, HPos.LEFT);
-//		GridPane.setConstraints(depCityLabel, 1,0);
+		Label fIDLabel = new Label("Flight ID: ");
+		Label fnumLabel = new Label("Flight Number: ");
 		
-		//Arrival City input
+		Label depCityLabel = new Label("Departure City: ");
+		Label depCityLabel2 = new Label("Departure City: ");
+
+		Label arrCityLabel = new Label("Arrival City: ");
+		Label arrCityLabel2 = new Label("Arrival City: ");
+		
+		Label monthLabel = new Label("Month: ");
+		Label monthLabel2 = new Label("Dep Month: ");
+		Label monthLabel3 = new Label("Arr Month: ");
+		
+		Label dayLabel = new Label("Day: ");
+		Label dayLabel2 = new Label("Dep Day: ");
+		Label dayLabel3 = new Label("Arr Day: ");
+		
+		Label yearLabel = new Label("Year: ");
+		Label yearLabel2 = new Label("Dep Year: ");
+		Label yearLabel3 = new Label("Arr Year: ");
+		
+		ComboBox<String> depCityDrop = new ComboBox<>();
+		depCityDrop.getItems().addAll("ATL", "ORD", "DCA", "DFW", "JFK", "LAX", "MIA", "DEN");
+		depCityDrop.setValue("Select");
+		
 		ComboBox<String> arrCityDrop = new ComboBox<>();
-		arrCityDrop.getItems().addAll("ATL", "ORD");
+		arrCityDrop.getItems().addAll("ATL", "ORD", "DCA", "DFW", "JFK", "LAX", "MIA", "DEN");
 		arrCityDrop.setValue("Select");
-//		GridPane.setValignment(depCityLabel, VPos.CENTER);
-//		GridPane.setHalignment(depCityLabel, HPos.LEFT);
-//		GridPane.setConstraints(depCityLabel, 1,0);
-
-
+		
 		//month drop down
 		ComboBox<String> monthDrop = new ComboBox<>();
 		monthDrop.getItems().addAll("January", "February", "March", "April", "May", "June",
@@ -220,16 +190,18 @@ public class ManageFlight {
 		flightIDInput.setMinWidth(100);
 		
 		flightNumberInput = new TextField();
-		flightNumberInput.setPromptText("Flight ID");
+		flightNumberInput.setPromptText("Flight Number");
 		flightNumberInput.setMinWidth(100);
+
+		//Departure City input ComboBox<String> question = new ComboBox<String>();
+		ComboBox<String> depCityADD = new ComboBox<>();
+		depCityADD.getItems().addAll("ATL", "ORD", "DCA", "DFW", "JFK", "LAX", "MIA", "DEN");
+		depCityADD.setValue("Select");
 		
-		depCityInput = new TextField();
-		depCityInput.setPromptText("Departure City");
-		depCityInput.setMinWidth(100);
-		
-		arrCityInput = new TextField();
-		arrCityInput.setPromptText("Arrival City");
-		arrCityInput.setMinWidth(100);
+		//Arrival City input
+		ComboBox<String> arrCityADD = new ComboBox<>();
+		arrCityADD.getItems().addAll("ATL", "ORD", "DCA", "DFW", "JFK", "LAX", "MIA", "DEN");
+		arrCityADD.setValue("Select");
 		
 		//month drop down
 		ComboBox<String> monthSearchDrop = new ComboBox<>();
@@ -238,6 +210,11 @@ public class ManageFlight {
 		monthSearchDrop.setValue("Month");
 		
 		//Day drop down
+//		ComboBox<Integer> daySearchDrop = new ComboBox<>();
+//		daySearchDrop.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+//				19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31);
+//		daySearchDrop.setValue(01);
+		
 		ComboBox<Integer> daySearchDrop = new ComboBox<>();
 		daySearchDrop.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 				19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31);
@@ -245,8 +222,8 @@ public class ManageFlight {
 		
 		//Year drop down
 		ComboBox<Integer> yearSearchDrop = new ComboBox<>();
-		daySearchDrop.getItems().addAll(2017,2018);
-		daySearchDrop.setValue(2017);
+		yearSearchDrop.getItems().addAll(2017,2018);
+		yearSearchDrop.setValue(2017);
 		
 //		String month = monthSearchDrop.getValue();
 //		int mon = Validator.intReturn(month);
@@ -256,27 +233,38 @@ public class ManageFlight {
 
 		//month drop down
 		ComboBox<String> monthSearchDrop2 = new ComboBox<>();
-		monthSearchDrop.getItems().addAll("January", "February", "March", "April", "May", "June",
+		monthSearchDrop2.getItems().addAll("January", "February", "March", "April", "May", "June",
 				"July", "August", "September", "October", "November", "December");
-		monthSearchDrop.setValue("Month");
+		monthSearchDrop2.setValue("Month");
 		
 		//Day drop down
 		ComboBox<Integer> daySearchDrop2 = new ComboBox<>();
-		daySearchDrop.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+		daySearchDrop2.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 				19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31);
-		daySearchDrop.setValue(01);
+		daySearchDrop2.setValue(01);
 		
 		//Year drop down
 		ComboBox<Integer> yearSearchDrop2 = new ComboBox<>();
-		daySearchDrop.getItems().addAll(2017,2018);
-		daySearchDrop.setValue(2017);
+		yearSearchDrop2.getItems().addAll(2017,2018);
+		yearSearchDrop2.setValue(2017);
 		
-//		String month1 = monthSearchDrop2.getValue();
-//		int mon1 = Validator.intReturn(month1);
-//		int year1 = yearSearchDrop2.getValue();
-//		int day1 = daySearchDrop2.getValue();
-//		LocalDate arrLocDate = LocalDate.of(year1, mon1 ,day1);
-		//LocalDate arrLocDate = LocalDate.of(yearSearchDrop2.getValue(), 1, daySearchDrop2.getValue());
+		ComboBox<String> monthSearchDrop3 = new ComboBox<>();
+		monthSearchDrop3.getItems().addAll("January", "February", "March", "April", "May", "June",
+				"July", "August", "September", "October", "November", "December");
+		monthSearchDrop3.setValue("Month");
+		
+		//Day drop down
+		ComboBox<Integer> daySearchDrop3 = new ComboBox<>();
+		daySearchDrop3.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+				19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31);
+		daySearchDrop3.setValue(01);
+		
+		//Year drop down
+		ComboBox<Integer> yearSearchDrop3 = new ComboBox<>();
+		yearSearchDrop3.getItems().addAll(2017,2018);
+		yearSearchDrop3.setValue(2017);
+		
+		
 		
 		//hour dropdown
 		ComboBox<String> hourDrop = new ComboBox<>();
@@ -317,31 +305,46 @@ public class ManageFlight {
 		BigDecimal price = new BigDecimal(100.00);
 		
 		//Buttons
-		Button addButton = new Button("Add");
+		Button addButton = new Button("Add Flight");
 		addButton.setOnAction(e -> {
+			
+			int d = Validator.intReturn(monthSearchDrop.getValue());
+			LocalDate depaDate = LocalDate.of(yearSearchDrop.getValue(), d, daySearchDrop.getValue());
+			
+			int a = Validator.intReturn(monthSearchDrop2.getValue());
+			LocalDate arriDate = LocalDate.of(yearSearchDrop2.getValue(), a, daySearchDrop2.getValue());
+			
 			Flight f = new Flight();
 			f.setfID(Validator.intReturn(flightIDInput.getText()));
-			f.setFlightNum(Validator.intReturn(flightNumberInput.getText()));
-			f.setDepCity(depCityInput.getText());
-			f.setArrCity(arrCityInput.getText());
-			f.setDepDate(null);
-			f.setArrDate(null);
+			//f.setFlightNum();
+			String s = flightNumberInput.getText();
+			int a2 = Validator.intReturn(s);
+			f.setFlightNum(a2);
+			f.setDepCity(depCityADD.getValue());
+			f.setArrCity(arrCityADD.getValue());
+			f.setDepDate(depaDate);
+			f.setArrDate(arriDate);
 			f.setDepTime(depLocTime);
 			f.setArrTime(arrLocTime);
 			f.setTicketPrice(price);
-			try {
-				addButtonClicked(f, tempUser);
-			} catch (MySQLIntegrityConstraintViolationException e1) {
-				// TODO Auto-generated catch block
-				AlertBox1.display("Error", "This flight is already booked");
-			}
+			addButtonClicked(f);
+			
 			List<Flight> flarr = new ArrayList<>(f.searchFlights(f.fID));
 			//flarr = f1.searchFlights(depCityDrop.getValue(), arrCityDrop.getValue(), lc);
 			ObservableList<Flight> flightsFound = FXCollections.observableArrayList(flarr);
 			flights.setItems(flightsFound);
 		});
-		Button deleteButton = new Button("Delete");
-		deleteButton.setOnAction(e -> deleteButtonClicked());
+		
+		
+		Button deleteButton = new Button("Delete selected Flight");
+		deleteButton.setOnAction(e -> {
+			Flight temp = new Flight();
+			temp = flights.getSelectionModel().getSelectedItems().get(0);
+			deleteButtonClicked();
+			int id = temp.getfID();
+			temp.deleteFlight(id);
+			
+		});
 		
 		flights = new TableView<>();
 //		flights.setItems(getFlights(f1,f2));
@@ -353,20 +356,53 @@ public class ManageFlight {
 		grid2.setVgap(8);
 		grid2.setHgap(10);
 		grid2.getChildren().addAll(depCityLabel, depCityDrop, arrCityLabel, arrCityDrop, 
-	    		monthLabel, monthDrop,dayLabel, dayDrop, yearLabel, yearDrop, searchByInfoButton, 
-	    		monthSearchDrop, daySearchDrop, yearSearchDrop, 
-	    		monthSearchDrop2, daySearchDrop2, yearSearchDrop2, hourDrop, minuteDrop, 
-	    		hourArrDrop, minuteArrDrop );
+	    		monthLabel, monthDrop, dayLabel, dayDrop, yearLabel, yearDrop, searchByInfoButton);
 		//flightIDInput , searchByIDButton, orSearchByLabel
-		VBox vBox2 = new VBox();
-		vBox2.getChildren().addAll(flightIDInput, depCityInput, arrCityInput, monthSearchDrop, daySearchDrop, yearSearchDrop, 
+		GridPane grid3 = new GridPane();
+		grid3.setPadding(new Insets(20));
+		grid3.setVgap(8);
+		grid3.setHgap(10);
+		grid3.getChildren().addAll(flightIDInput, depCityADD, arrCityADD, flightNumberInput,
+				monthSearchDrop, daySearchDrop, yearSearchDrop, 
 	    		monthSearchDrop2, daySearchDrop2, yearSearchDrop2, hourDrop, minuteDrop, 
-	    		hourArrDrop, minuteArrDrop, addButton, deleteButton);
-		vBox2.setPadding(new Insets(20, 50, 200, 10));
+	    		hourArrDrop, minuteArrDrop,  addButton, deleteButton, depCityLabel2, arrCityLabel2,
+	    		monthLabel2, monthLabel3, dayLabel2, dayLabel3, yearLabel2, yearLabel3, fIDLabel, fnumLabel);
+		grid3.setPadding(new Insets(20, 50, 200, 10));
 		//vBox2.setCenterShape(true);
+		
+		GridPane.setConstraints(fIDLabel, 0, 0);
+		GridPane.setConstraints(flightIDInput, 1, 0);
+		GridPane.setConstraints(fnumLabel, 2, 0);
+		GridPane.setConstraints(flightNumberInput, 3, 0);
+		GridPane.setConstraints(depCityLabel2, 0 ,1);
+		GridPane.setConstraints(depCityADD, 1 ,1);
+		GridPane.setConstraints(arrCityLabel2, 0, 2);
+		GridPane.setConstraints(arrCityADD, 1, 2);
+		
+		GridPane.setConstraints(monthLabel2, 0, 3);
+		GridPane.setConstraints(monthSearchDrop, 0, 4);
+		GridPane.setConstraints(dayLabel2, 1, 3);
+		GridPane.setConstraints(daySearchDrop, 1, 4);
+		GridPane.setConstraints(yearLabel2, 2, 3);
+		GridPane.setConstraints(yearSearchDrop, 2, 4);
+		
+		GridPane.setConstraints(monthLabel3, 0, 5);
+		GridPane.setConstraints(monthSearchDrop2, 0, 6);
+		GridPane.setConstraints(dayLabel3, 1, 5);
+		GridPane.setConstraints(daySearchDrop2, 1, 6);
+		GridPane.setConstraints(yearLabel3, 2, 5);
+		GridPane.setConstraints(yearSearchDrop2, 2, 6);
+		
+		GridPane.setConstraints(hourDrop, 3, 4);
+		GridPane.setConstraints(minuteDrop, 4, 4);
+		GridPane.setConstraints(hourArrDrop, 3, 6);
+		GridPane.setConstraints(minuteArrDrop, 4, 6);
+		GridPane.setConstraints(addButton, 1, 10);
+		GridPane.setConstraints(deleteButton, 1, 11);
 		
 		int c = 0;
 		int r = ((c+1) * 2 - 1);
+	
 	//	GridPane.setConstraints(orSearchByLabel, 0, 2);
 
 		GridPane.setConstraints(depCityLabel,c, r);
@@ -390,7 +426,7 @@ public class ManageFlight {
 		
 		
 		border.setLeft(grid2);
-		border.setCenter(vBox2);
+		border.setCenter(grid3);
 		GridPane.setConstraints(border, 1 ,0);
 		
 		grid.setPadding(new Insets(20));
@@ -417,11 +453,11 @@ public class ManageFlight {
 //		return flights;
 //	}
 	
-	public static void addButtonClicked(Flight f, User u) throws MySQLIntegrityConstraintViolationException{
+	public static void addButtonClicked(Flight f){
 		Flight tempF = new Flight();
-		Reservation tempR = new Reservation();
+		//Reservation tempR = new Reservation();
 		tempF.createFlight(f);
-		tempR.createReservation(tempF, u);
+		//tempR.createReservation(tempF, u);
 	}
 	
 	public static void deleteButtonClicked(){

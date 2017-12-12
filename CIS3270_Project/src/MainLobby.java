@@ -1,23 +1,30 @@
 
 import javafx.application.Application;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.awt.SplashScreen;
-import java.sql.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 public class MainLobby extends Application{
 	Stage main_window, signUp_window, login_window;
 	Scene lobby, main_scene;
+
+	public static final Font ITALIC_FONT =
+            Font.font(
+            		"System Regular",
+                    FontWeight.EXTRA_BOLD,
+                    20
+            );
 	
 	public static void main(String[] args){
 		try {
@@ -30,34 +37,8 @@ public class MainLobby extends Application{
 	        SplashScreen splashScreen = SplashScreen.getSplashScreen();//getSplashScreen();
 	        if (splashScreen!=null) splashScreen.close();
 	    } catch (Exception e) {}
-		
-		launch(args);
-//		User us = new User();
 //		
-//		us.login("Admin234","P@s$w0Rd321");
-//		us.getUserName();
-//		us.getfName();
-		
-//		Flight f1 = new Flight();
-//		LocalDate lc = LocalDate.of(2017, 12,  10);
-		
-//		ArrayList<Flight> arr = new ArrayList<>(f1.searchFlights("ATL", "ORD", lc));
-		
-//		if(arr.isEmpty()) {
-//			System.out.println("It looks like we didn't find any flights matching your criteria. " +
-//							   "Try your search again with a different city or departure date.");
-//		}
-//		
-//		//f.updateArrDate(1, LocalDate.of(2017, 12, 25));
-//		
-//		else {
-//			Iterator<Flight> i = arr.iterator();
-//			while (i.hasNext()) {
-//				System.out.print(i.next());
-//			}
-//		}
-
-		
+		launch(args);		
 	}
 
 	@Override
@@ -67,11 +48,14 @@ public class MainLobby extends Application{
 			Thread.sleep(300);
 			
 		}finally{}
-//		catch (InterruptException ie) {
-//			
-//		}
 		
-		Label header = new Label("Flights Galore");
+		Text header = new Text("Flights Galore");
+		header.setFill(Color.web("#FDFEFE"));
+		
+		GridPane.setHalignment(header, HPos.CENTER);
+		GridPane.setValignment(header, VPos.CENTER);
+		header.setFont(Font.font (20));
+		
 		Button loginButton = new Button("Login");
 		Button signUpButton = new Button("Sign Up");
 
@@ -83,15 +67,17 @@ public class MainLobby extends Application{
 		grid.setPadding(new Insets(10));
 		grid.setVgap(8);
 		grid.setHgap(10);
+		grid.setStyle("-fx-background-color: #5D6D7E;");
 		
 		//set constraints
-		GridPane.setConstraints(loginButton, 4,4);
+		GridPane.setConstraints(loginButton, 4,6);
+		GridPane.setConstraints(signUpButton, 5,6);
 		GridPane.setConstraints(header, 4, 3);
 		
 		//add to scene
 		grid.getChildren().addAll(header, loginButton, signUpButton);
 		
-		Scene scene = new Scene(grid, 300, 500);
+		Scene scene = new Scene(grid, 400, 500);
 		main_window.setScene(scene);
 		main_window.show();
 		

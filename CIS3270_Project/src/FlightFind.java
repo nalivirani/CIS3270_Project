@@ -49,12 +49,12 @@ public class FlightFind {
 								
 		//Departure City input ComboBox<String> question = new ComboBox<String>();
 		ComboBox<String> depCityDrop = new ComboBox<>();
-		depCityDrop.getItems().addAll("ATL", "ORD");
+		depCityDrop.getItems().addAll("ATL", "ORD", "DCA", "DFW", "JFK", "LAX", "MIA", "DEN");
 		depCityDrop.setValue("Select");
 		
 		//Arrival City input
 		ComboBox<String> arrCityDrop = new ComboBox<>();
-		arrCityDrop.getItems().addAll("ATL", "ORD");
+		arrCityDrop.getItems().addAll("ATL", "ORD", "DCA", "DFW", "JFK", "LAX", "MIA", "DEN");
 		arrCityDrop.setValue("Select");
 
 
@@ -86,60 +86,60 @@ public class FlightFind {
 		fID.setMinWidth(50);
 		fID.setCellValueFactory(new PropertyValueFactory<>("fID"));
 		
-		TableColumn<Flight, Integer> flightnum = new TableColumn<>("Flight Number");
+		TableColumn<Flight, Integer> flightnum = new TableColumn<>("Flight #");
 		flightnum.setMinWidth(50);
 		flightnum.setCellValueFactory(new PropertyValueFactory<>("flightNum"));
 		
 		TableColumn<Flight, String> depCity = new TableColumn<>("Departure City");
-		depCity.setMinWidth(250);
+		depCity.setMinWidth(125);
 		depCity.setCellValueFactory(new PropertyValueFactory<>("depCity"));
 		
 		TableColumn<Flight, String> arrCity = new TableColumn<>("Arrival City");
-		arrCity.setMinWidth(250);
+		arrCity.setMinWidth(100);
 		arrCity.setCellValueFactory(new PropertyValueFactory<>("arrCity"));
 		
 		TableColumn<Flight, LocalDate> depDate = new TableColumn<>("Departure Date");
-		depDate.setMinWidth(250);
+		depDate.setMinWidth(130);
 		depDate.setCellValueFactory(new PropertyValueFactory<>("depDate"));
 		
 		TableColumn<Flight, LocalDate> arrDate = new TableColumn<>("Arrival Date");
-		arrDate.setMinWidth(250);
+		arrDate.setMinWidth(100);
 		arrDate.setCellValueFactory(new PropertyValueFactory<>("arrDate"));
 		
 		TableColumn<Flight, LocalTime> depTime = new TableColumn<>("Departure Time");
-		depTime.setMinWidth(250);
+		depTime.setMinWidth(100);
 		depTime.setCellValueFactory(new PropertyValueFactory<>("depTime"));
 		
 		TableColumn<Flight, LocalTime> arrTime = new TableColumn<>("Arrival Time");
-		arrTime.setMinWidth(250);
+		arrTime.setMinWidth(100);
 		arrTime.setCellValueFactory(new PropertyValueFactory<>("arrTime"));
 		
 		TableColumn<Flight, Integer> distance = new TableColumn<>("distance");
-		distance.setMinWidth(150);
+		distance.setMinWidth(100);
 		distance.setCellValueFactory(new PropertyValueFactory<>("distance"));
 		
 		TableColumn<Flight, String> stopType = new TableColumn<>("Stop Type");
-		stopType.setMinWidth(250);
+		stopType.setMinWidth(100);
 		stopType.setCellValueFactory(new PropertyValueFactory<>("stopType"));
 		
 		TableColumn<Flight, String> region = new TableColumn<>("region");
-		region.setMinWidth(250);
+		region.setMinWidth(100);
 		region.setCellValueFactory(new PropertyValueFactory<>("region"));
 		
 		TableColumn<Flight, BigDecimal> ticketPrice = new TableColumn<>("ticket Price");
-		ticketPrice.setMinWidth(250);
+		ticketPrice.setMinWidth(100);
 		ticketPrice.setCellValueFactory(new PropertyValueFactory<>("ticketPrice"));
 		
 		TableColumn<Flight, BigDecimal> fcTicketPrice = new TableColumn<>("fc Ticket Price");
-		fcTicketPrice.setMinWidth(250);
+		fcTicketPrice.setMinWidth(100);
 		fcTicketPrice.setCellValueFactory(new PropertyValueFactory<>("fcTicketPrice"));
 		
 		TableColumn<Flight, Integer> seats = new TableColumn<>("seats");
-		seats.setMinWidth(150);
+		seats.setMinWidth(100);
 		seats.setCellValueFactory(new PropertyValueFactory<>("seats"));
 		
 		TableColumn<Flight, Integer> seatsRem = new TableColumn<>("seatsRem");
-		seatsRem.setMinWidth(150);
+		seatsRem.setMinWidth(50);
 		seatsRem.setCellValueFactory(new PropertyValueFactory<>("seatsRem"));
 		
 		TableColumn<Flight, Integer> numRows = new TableColumn<>("numRows");
@@ -231,6 +231,7 @@ public class FlightFind {
 				
 		Scene scene = new Scene(grid);
 		window.setScene(scene);
+		window.setMinWidth(800);
 		window.show();
 
 	}

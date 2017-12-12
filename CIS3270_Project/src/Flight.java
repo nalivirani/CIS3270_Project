@@ -898,8 +898,11 @@ public class Flight extends Database{
 			PreparedStatement flightDelete = c.prepareStatement(deleteStatement);
 			
 			flightDelete.setInt(1, fID);
+			flightDelete.executeUpdate();
 			
 			response = "The flight was succesfully deleted.";
+			
+			AlertBox1.display("Success", "This flight was deleted");
 		}
 		
 		catch (Exception e) {

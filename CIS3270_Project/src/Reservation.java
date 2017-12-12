@@ -173,22 +173,16 @@ public class Reservation extends Database{
 		
 	}
 	
-	public void deleteReservation(Reservation r) {
+	public void deleteReservation(int ticketNumber) {
 		
-		if(!r.exists(r.ticketNum)) {
-			
-			System.out.println("Unable to locate the travel reservation matching the data provided.");
-		}
-		
-		else {
-			
 			try {
 				Connection c = DriverManager.getConnection(super.getConnectionID(), super.getDBusername(), super.getDBpassword());
 			
 				String deleteStatement = "delete from " + TABLE + " Where ticketNum=?";
 				PreparedStatement reservationDelete = c.prepareStatement(deleteStatement);
 				
-				reservationDelete.setInt(1, r.ticketNum);
+				reservationDelete.setInt(1, ticketNumber);
+				reservationDelete.executeUpdate();
 				
 				AlertBox1.display("Success", "This reservation was deleted");
 			}
@@ -199,8 +193,6 @@ public class Reservation extends Database{
 			}
 			
 		}
-		
-	}
 	
 	
 	public ArrayList<Reservation> searchReservations (int ssn) {

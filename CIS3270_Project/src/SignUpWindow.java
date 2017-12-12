@@ -1,6 +1,5 @@
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -8,7 +7,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -208,10 +206,20 @@ public class SignUpWindow {
 		
 		signUpButton.setOnAction(e -> {
 			User tempUser = new User();
+			if(question.toString() != null){			
+			if((ssnInput.getText()).length() == 9 && Validator.isInt(ssnInput.getText())){ 
+			if((Validator.isInt(zipInput.getText()) && (Integer.parseInt(zipInput.getText()) < 90000))){
+			if(firstNameInput.getLength() > 0 && 
+					lastNameInput.getLength() > 0 && 
+					addressInput.getLength() > 0 && zipInput.getLength() > 0
+					&& emailInput.getLength() > 0 && 
+					usernameInput.getLength() > 0 && passInput.getLength() > 0 &&
+					ssnInput.getLength() > 0 &&
+					recoveryAnswerInput.getLength() > 0){
 			if((ssnInput.getText()).length() == 9 && Validator.isInt(ssnInput.getText())){
 				
-			if((zipInput.getText()).length() < 5 && (zipInput.getText()).length() > 0 
-				&& Validator.isInt(zipInput.getText()) && (Integer.parseInt(zipInput.getText()) < 94000)){
+			if((zipInput.getText()).length() <= 5 && (zipInput.getText()).length() > 0 
+				&& Validator.isInt(zipInput.getText()) && (Integer.parseInt(zipInput.getText()) < 90000)){
 				if(tempUser.isNewUser(Integer.parseInt(ssnInput.getText())) && tempUser.isNewUser(usernameInput.getText())){
 					tempUser.setfName(firstNameInput.getText());
 					tempUser.setlName(lastNameInput.getText());
@@ -248,6 +256,19 @@ public class SignUpWindow {
 				AlertBox1.display("Please check your input", "Your Social Security Number is incorrect");
 			}
 			}
+			}else{
+				AlertBox1.display("Please check your input", "All fields must be completed");
+			}
+			}else{
+				AlertBox1.display("Please check your input", "Your Zip code is incorrect");
+			}
+			}else{
+				AlertBox1.display("Please check your input", "Your Social Security Number is incorrect");
+			}
+			}else{
+				AlertBox1.display("Please check your input", "You must select a Security Question");
+			}
+			
 			
 		});
 		
@@ -262,6 +283,7 @@ public class SignUpWindow {
 				recoveryAnswerLabel, recoveryAnswerInput, question, questionLabel, 
 				userInfo, secQInfo, secAInfo, passInfo, signUpButton, cancelButton, adminInput, adminLabel);
 
+		grid.setStyle("-fx-background-color: #EBDEF0");
 		Scene scene = new Scene(grid);
 		window.setScene(scene);
 		window.showAndWait();

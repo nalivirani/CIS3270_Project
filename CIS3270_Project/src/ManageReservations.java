@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,20 +41,24 @@ public class ManageReservations {
 		flightNum.setCellValueFactory(new PropertyValueFactory<>("flightNum"));
 		
 		TableColumn<Reservation, String> depCity = new TableColumn<>("Departure City");
-		depCity.setMinWidth(250);
+		depCity.setMinWidth(150);
 		depCity.setCellValueFactory(new PropertyValueFactory<>("depCity"));
 		
 		TableColumn<Reservation, String> arrCity = new TableColumn<>("Arrival City");
-		arrCity.setMinWidth(250);
+		arrCity.setMinWidth(125);
 		arrCity.setCellValueFactory(new PropertyValueFactory<>("arrCity"));
 		
 		TableColumn<Reservation, LocalDate> depDate = new TableColumn<>("Departure Date");
-		depDate.setMinWidth(100);
+		depDate.setMinWidth(250);
 		depDate.setCellValueFactory(new PropertyValueFactory<>("depDate"));
 		
 		TableColumn<Reservation, LocalDate> arrDate = new TableColumn<>("Arrival Date");
-		arrDate.setMinWidth(100);
+		arrDate.setMinWidth(200);
 		arrDate.setCellValueFactory(new PropertyValueFactory<>("arrDate"));
+		
+		TableColumn<Reservation, BigDecimal> ticketPrice = new TableColumn<>("Ticket Price");
+		ticketPrice.setMinWidth(100);
+		ticketPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 		
 		List<Reservation> rearr = new ArrayList<>(tempReservation.searchReservations(tempUser.getSsn()));
 		ObservableList<Reservation> reservationsFound = FXCollections.observableArrayList(rearr);		
@@ -61,14 +66,15 @@ public class ManageReservations {
 		
 		reservations = new TableView<>();
 		
-		reservations.getColumns().addAll(ticketNum, flightNum, depCity,arrCity, depDate);
+		reservations.getColumns().addAll(ticketNum, depCity,arrCity, depDate, ticketPrice);
 		reservations.setItems(reservationsFound);
 		
 		deleteReservation.setOnAction(e -> {
 			Reservation temp = new Reservation();
 			temp = reservations.getSelectionModel().getSelectedItems().get(0);
 			deleteButtonClicked();
-			temp.deleteReservation(temp);
+			System.out.println(temp.getTicketNum());
+			temp.deleteReservation(temp.getTicketNum());
 		
 		});
 		
