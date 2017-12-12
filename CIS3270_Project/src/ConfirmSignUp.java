@@ -1,11 +1,11 @@
-import javafx.application.Application;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
+
 import javafx.scene.layout.VBox;
 
 public class ConfirmSignUp {
@@ -48,6 +48,7 @@ public class ConfirmSignUp {
 		Button confirmButton = new Button("Confirm");		
 		confirmButton.setOnAction(e -> {
 			confirm = !confirm;
+			@SuppressWarnings("unused")
 			User u = xyz.register(xyz);
 			xyz.adminPermission(xyz);
 			window.close();

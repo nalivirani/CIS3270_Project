@@ -4,8 +4,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -19,7 +17,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -40,11 +37,11 @@ public class ManageFlight {
 		GridPane grid = new GridPane();
 		BorderPane border = new BorderPane();
 
-		Button searchByInfoButton = new Button("Search for Flights");
-		Button searchByIDButton = new Button("Search by Flight ID");
+		Button searchByInfoButton = new Button("Manage Flights");
+		//Button searchByIDButton = new Button("Search by Flight ID");
 		
 		//labels
-		Label orSearchByLabel = new Label(" ~ OR SEARCH BY ~ ");
+		//Label orSearchByLabel = new Label(" ~ OR SEARCH BY ~ ");
 		
 		Label fIDLabel = new Label("Flight ID: ");
 		Label fnumLabel = new Label("Flight Number: ");
@@ -296,8 +293,7 @@ public class ManageFlight {
 		minuteArrDrop.setValue("00");
 		int arrMinute = Integer.parseInt(minuteDrop.getValue());
 		
-		LocalTime depLocTime = LocalTime.of(depHour, depMinute);
-		LocalTime arrLocTime = LocalTime.of(arrHour, arrMinute);
+		
 //		double tp = Double.parseDouble(tPrice.getText());
 //		
 //		BigDecimal realTicketPrice = new BigDecimal(tp);
@@ -314,6 +310,9 @@ public class ManageFlight {
 			int a = Validator.intReturn(monthSearchDrop2.getValue());
 			LocalDate arriDate = LocalDate.of(yearSearchDrop2.getValue(), a, daySearchDrop2.getValue());
 			
+			LocalTime depLocTime = LocalTime.of(depHour, depMinute);
+			LocalTime arrLocTime = LocalTime.of(arrHour, arrMinute);
+			
 			Flight f = new Flight();
 			f.setfID(Validator.intReturn(flightIDInput.getText()));
 			//f.setFlightNum();
@@ -327,6 +326,7 @@ public class ManageFlight {
 			f.setDepTime(depLocTime);
 			f.setArrTime(arrLocTime);
 			f.setTicketPrice(price);
+			f.setSeatsRem(150);
 			addButtonClicked(f);
 			
 			List<Flight> flarr = new ArrayList<>(f.searchFlights(f.fID));

@@ -1,6 +1,4 @@
-import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -8,9 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 public class LoginWindow{
 	
@@ -28,7 +23,7 @@ public class LoginWindow{
 		window.setTitle("Flights Galore");
 		window.setMinWidth(600);
 		window.setMinHeight(300);
-		Label label = new Label("Please Login");
+		//Label label = new Label("Please Login");
 		
 		Button loginButton = new Button("Login");
 		Button cancelButton = new Button("Cancel");
@@ -39,12 +34,11 @@ public class LoginWindow{
 		grid.setPadding(ins);
 		grid.setVgap(8);
 		grid.setHgap(10);
-		grid.setStyle("-fx-background-color: #5D6D7E;");
+		
 		
 		//name label
 		Label usernameLabel = new Label("Username");
 		GridPane.setConstraints(usernameLabel,0,0);
-		usernameLabel.setTextFill(Color.web("#FDFEFE"));
 						
 		//name input
 		TextField usernameInput = new TextField();
@@ -54,7 +48,6 @@ public class LoginWindow{
 		//pass label
 		Label passLabel = new Label("Password");
 		GridPane.setConstraints(passLabel,0,1);
-		passLabel.setTextFill(Color.web("#FDFEFE"));
 						
 		//pass input
 		TextField passInput = new TextField();

@@ -5,11 +5,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -50,7 +47,6 @@ public class MainLobby extends Application{
 		}finally{}
 		
 		Text header = new Text("Flights Galore");
-		header.setFill(Color.web("#FDFEFE"));
 		
 		GridPane.setHalignment(header, HPos.CENTER);
 		GridPane.setValignment(header, VPos.CENTER);
@@ -67,7 +63,7 @@ public class MainLobby extends Application{
 		grid.setPadding(new Insets(10));
 		grid.setVgap(8);
 		grid.setHgap(10);
-		grid.setStyle("-fx-background-color: #5D6D7E;");
+		
 		
 		//set constraints
 		GridPane.setConstraints(loginButton, 4,6);

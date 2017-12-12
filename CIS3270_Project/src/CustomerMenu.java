@@ -1,14 +1,12 @@
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 public class CustomerMenu{
 
 	public static Scene display(User tempUser) {
-		Stage window = new Stage();
+		//Stage window = new Stage();
 		
 		Button searchButton = new Button("Find Flights");
 		Button manageReservationsButton = new Button("Manage Reservations");

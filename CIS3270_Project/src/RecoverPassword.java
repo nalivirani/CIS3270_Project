@@ -2,7 +2,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -20,7 +19,7 @@ public class RecoverPassword {
 		Label prompt = new Label("Please enter Username (case sensitive)");
 		Label secQ = new Label();
 		Label secA = new Label();
-		Label prompt2 = new Label();
+		//Label prompt2 = new Label();
 		Label pass = new Label();
 		Button continueButton = new Button("Continue");
 		continueButton.setOnAction(e ->{

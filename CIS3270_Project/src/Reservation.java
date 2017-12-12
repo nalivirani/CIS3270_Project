@@ -131,7 +131,7 @@ public class Reservation extends Database{
 	public void createReservation(Flight f, User u) {
 		
 		String sC = "";
-		BigDecimal price = new BigDecimal(0.00);
+		//BigDecimal price = new BigDecimal(0.00);
 		
 //		if(seatClass.contains("first") || seatClass.contains("First")) {
 //			sC = "First-Class";

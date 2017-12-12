@@ -4,6 +4,7 @@ public class Validator {
 	
 	public static boolean isInt(String str){
 		try{
+			@SuppressWarnings("unused")
 			int num = Integer.parseInt(str);
 			return true;
 		}catch(NumberFormatException e){

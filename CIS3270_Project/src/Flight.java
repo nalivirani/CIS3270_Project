@@ -2,9 +2,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -654,9 +651,8 @@ public class Flight extends Database{
 		}
 		
 		catch (Exception e){
-			e.printStackTrace();		
+			System.out.println("It looks like you entered a duplicate flight. Please try again.");		
 		}
-		
 	}
 
 /*********************************************************************************

@@ -283,7 +283,7 @@ public class SignUpWindow {
 				recoveryAnswerLabel, recoveryAnswerInput, question, questionLabel, 
 				userInfo, secQInfo, secAInfo, passInfo, signUpButton, cancelButton, adminInput, adminLabel);
 
-		grid.setStyle("-fx-background-color: #EBDEF0");
+		
 		Scene scene = new Scene(grid);
 		window.setScene(scene);
 		window.showAndWait();
