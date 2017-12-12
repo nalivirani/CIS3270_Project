@@ -208,23 +208,29 @@ public class SignUpWindow {
 		
 		signUpButton.setOnAction(e -> {
 			User tempUser = new User();
-			if(tempUser.isNewUser(Integer.parseInt(ssnInput.getText())) && tempUser.isNewUser(usernameInput.getText())){
-				tempUser.setfName(firstNameInput.getText());
-				tempUser.setlName(lastNameInput.getText());
-				tempUser.setAddress(addressInput.getText());
-				tempUser.setZip(Integer.parseInt(zipInput.getText()));
-				tempUser.setState(state.getValue());
-				tempUser.setEmail(emailInput.getText());
-				tempUser.setUserName(usernameInput.getText());
-				tempUser.setPassword(passInput.getText());
-				tempUser.setSsn(Integer.parseInt(ssnInput.getText()));
-				tempUser.setSecurityQuestion(question.getValue());
-				tempUser.setSecurityAnswer(recoveryAnswerInput.getText());
+			if((ssnInput.getText()).length() == 9 && Validator.isInt(ssnInput.getText())){
+				
+			if((zipInput.getText()).length() < 5 && (zipInput.getText()).length() > 0 
+				&& Validator.isInt(zipInput.getText()) && (Integer.parseInt(zipInput.getText()) < 94000)){
+				if(tempUser.isNewUser(Integer.parseInt(ssnInput.getText())) && tempUser.isNewUser(usernameInput.getText())){
+					tempUser.setfName(firstNameInput.getText());
+					tempUser.setlName(lastNameInput.getText());
+					tempUser.setAddress(addressInput.getText());
+					tempUser.setZip(Integer.parseInt(zipInput.getText()));
+					tempUser.setState(state.getValue());
+					tempUser.setEmail(emailInput.getText());
+					tempUser.setUserName(usernameInput.getText());
+					tempUser.setPassword(passInput.getText());
+					tempUser.setSsn(Integer.parseInt(ssnInput.getText()));
+					tempUser.setSecurityQuestion(question.getValue());
+					tempUser.setSecurityAnswer(recoveryAnswerInput.getText());
 				if(adminInput.getText().equals("zaq12wsxZAQ!@WSX")){
 					tempUser.setPermissionLevel(1);
 				}else{
 					tempUser.setPermissionLevel(0);
 				}
+
+				
 				//User u = tempUser.register(tempUser);
 				System.out.println(tempUser.getPermissionLevel());
 				ConfirmSignUp.display(tempUser);
@@ -234,7 +240,14 @@ public class SignUpWindow {
 //				}else{
 //					window.showAndWait();
 //				}
-				}
+				
+			}else{
+				AlertBox1.display("Please check your input", "Your Zip code is incorrect");
+			}
+			}else{
+				AlertBox1.display("Please check your input", "Your Social Security Number is incorrect");
+			}
+			}
 			
 		});
 		
